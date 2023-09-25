@@ -1,33 +1,33 @@
-import React, { useState, useEffect } from 'react';
-import { useNavigate } from 'react-router-dom';
-import { styled } from '@mui/system';
-import { TextField, Grid, Button, Typography } from '@mui/material';
-import { useFormik } from 'formik';
-import * as Yup from 'yup';
+import React, { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
+import { styled } from "@mui/system";
+import { TextField, Grid, Button, Typography } from "@mui/material";
+import { useFormik } from "formik";
+import * as Yup from "yup";
 
 const MainContainer = styled(Grid)({
-  height: '100vh',
-  display: 'flex',
+  height: "100vh",
+  display: "flex",
 });
 
 const LeftSection = styled(Grid)({
-  width: '50%',
-  background: 'white',
-  padding: '10rem',
-  display: 'flex',
-  alignItems: 'center',
-  justifyContent: 'center',
+  width: "50%",
+  background: "white",
+  padding: "10rem",
+  display: "flex",
+  alignItems: "center",
+  justifyContent: "center",
 });
 
 const RightSection = styled(Grid)({
-  width: '50%',
-  background: '#42427C',
-  backgroundRepeat: 'no-repeat',
-  backgroundSize: 'cover',
-  backgroundPosition: 'center',
-  display: 'flex',
-  alignItems: 'center',
-  justifyContent: 'center',
+  width: "50%",
+  background: "#42427C",
+  backgroundRepeat: "no-repeat",
+  backgroundSize: "cover",
+  backgroundPosition: "center",
+  display: "flex",
+  alignItems: "center",
+  justifyContent: "center",
 });
 
 const OTPForm = () => {
@@ -35,40 +35,40 @@ const OTPForm = () => {
 
   const validationSchema = Yup.object().shape({
     digit1: Yup.string()
-      .matches(/^\d$/, 'Enter a single digit')
-      .required('Required'),
+      .matches(/^\d$/, "Enter a single digit")
+      .required("Required"),
     digit2: Yup.string()
-      .matches(/^\d$/, 'Enter a single digit')
-      .required('Required'),
+      .matches(/^\d$/, "Enter a single digit")
+      .required("Required"),
     digit3: Yup.string()
-      .matches(/^\d$/, 'Enter a single digit')
-      .required('Required'),
+      .matches(/^\d$/, "Enter a single digit")
+      .required("Required"),
     digit4: Yup.string()
-      .matches(/^\d$/, 'Enter a single digit')
-      .required('Required'),
+      .matches(/^\d$/, "Enter a single digit")
+      .required("Required"),
     digit5: Yup.string()
-      .matches(/^\d$/, 'Enter a single digit')
-      .required('Required'),
+      .matches(/^\d$/, "Enter a single digit")
+      .required("Required"),
     digit6: Yup.string()
-      .matches(/^\d$/, 'Enter a single digit')
-      .required('Required'),
+      .matches(/^\d$/, "Enter a single digit")
+      .required("Required"),
   });
 
   const formik = useFormik({
     initialValues: {
-      digit1: '',
-      digit2: '',
-      digit3: '',
-      digit4: '',
-      digit5: '',
-      digit6: '',
+      digit1: "",
+      digit2: "",
+      digit3: "",
+      digit4: "",
+      digit5: "",
+      digit6: "",
     },
     validationSchema: validationSchema,
     onSubmit: (values) => {
       const otp = `${values.digit1}${values.digit2}${values.digit3}${values.digit4}${values.digit5}${values.digit6}`;
       // Handle OTP submission here
-      console.log('Submitted OTP: ', otp);
-      navigate('/resetPassword');
+      console.log("Submitted OTP: ", otp);
+      navigate("/resetPassword");
     },
   });
 
@@ -96,11 +96,11 @@ const OTPForm = () => {
         gutterBottom
         sx={{
           // fontFamily: 'sharp-sans-bold, fallback-font, Arial, sans-serif',
-          fontSize: '24px',
-          lineHeight: '32px',
-          letterSpacing: '0em',
-          textTransform: 'none',
-          marginBottom: '12px',
+          fontSize: "24px",
+          lineHeight: "32px",
+          letterSpacing: "0em",
+          textTransform: "none",
+          marginBottom: "12px",
           fontWeight: 800,
           // color: '#0477C5',
         }}
@@ -109,21 +109,29 @@ const OTPForm = () => {
       </Typography>
       <Typography
         gutterBottom
-        varient='body'
+        varient="body"
         sx={{
           // fontFamily: 'sharp-sans-bold, fallback-font, Arial, sans-serif',
-          fontSize: '16px',
-          lineHeight: '32px',
-          letterSpacing: '0em',
-          textTransform: 'none',
-          marginBottom: '12px',
+          fontSize: "16px",
+          lineHeight: "32px",
+          letterSpacing: "0em",
+          textTransform: "none",
+          marginBottom: "12px",
           // fontWeight: 800,
           // color: "#0477C5",
         }}
       >
         We have sent otp on your email.
       </Typography>
-      <Grid container spacing={2} sx={{'.css-1t8l2tu-MuiInputBase-input-MuiOutlinedInput-input':{height: "20px"}}}>
+      <Grid
+        container
+        spacing={2}
+        sx={{
+          ".css-1t8l2tu-MuiInputBase-input-MuiOutlinedInput-input": {
+            height: "20px",
+          },
+        }}
+      >
         {[1, 2, 3, 4, 5, 6].map((index) => (
           <Grid item xs={2} key={index}>
             <TextField
@@ -132,7 +140,7 @@ const OTPForm = () => {
               variant="outlined"
               name={`digit${index}`}
               type="number"
-              color='primary'
+              color="primary"
               inputProps={{ maxLength: 1 }}
               {...formik.getFieldProps(`digit${index}`)}
               error={
@@ -150,13 +158,13 @@ const OTPForm = () => {
           <Button
             type="submit"
             variant="contained"
-            color= 'primary'
+            color="primary"
             fullWidth
             style={{
-              marginTop: '16px',
-              color: '#FFF',
+              marginTop: "16px",
+              color: "#FFF",
               // marginBottom: "16px",
-              height: '40px',
+              height: "40px",
               fontWeight: 700,
             }}
           >
@@ -168,16 +176,16 @@ const OTPForm = () => {
             <Typography
               gutterBottom
               type="button"
-              varient = 'body'
+              varient="body"
               sx={{
                 // fontFamily: 'sharp-sans-bold, fallback-font, Arial, sans-serif',
-                fontSize: '16px',
-                lineHeight: '32px',
-                letterSpacing: '0em',
-                textTransform: 'none',
+                fontSize: "16px",
+                lineHeight: "32px",
+                letterSpacing: "0em",
+                textTransform: "none",
                 // color: '#0477C5',
-                marginLeft: '8px',
-                marginTop: '3px',
+                marginLeft: "8px",
+                marginTop: "3px",
               }}
             >
               Reset OTP again
@@ -188,18 +196,18 @@ const OTPForm = () => {
       <Grid>
         <Typography
           gutterBottom
-          varient= 'body'
+          varient="body"
           sx={{
             // fontFamily: 'sharp-sans-bold, fallback-font, Arial, sans-serif',
-            fontSize: '12px',
-            lineHeight: '32px',
-            letterSpacing: '0em',
-            textTransform: 'none',
+            fontSize: "12px",
+            lineHeight: "32px",
+            letterSpacing: "0em",
+            textTransform: "none",
             // color: "#0477C5",
           }}
         >
-          Resend otp in{' '}
-          <span style={{ color: 'primary' }}>
+          Resend otp in{" "}
+          <span style={{ color: "primary" }}>
             {minutes}:{seconds < 10 ? `0${seconds}` : seconds} secs
           </span>
         </Typography>
@@ -211,13 +219,12 @@ const OTPForm = () => {
 const OTP = () => {
   return (
     <MainContainer>
-      <LeftSection
-      sx={{width: { xs: '100%', md: '50%' },}}>
+      <LeftSection sx={{ width: { xs: "100%", md: "50%" } }}>
         <OTPForm />
       </LeftSection>
       <RightSection
         sx={{
-          display: { xs: 'none', sm: 'none', md: 'block' },
+          display: { xs: "none", sm: "none", md: "block" },
         }}
       />
     </MainContainer>

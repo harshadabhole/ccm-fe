@@ -1,14 +1,9 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
-import {
-  Button,
-  Grid,
-  Typography,
-} from "@mui/material";
+import { Button, Grid, Typography } from "@mui/material";
 import { styled } from "@mui/system";
-import { Formik, Form} from "formik";
-import { logout } from "../../../store/slices/authSlices";
+import { Formik, Form } from "formik";
 
 const MainContainer = styled(Grid)({
   height: "100vh",
@@ -40,21 +35,20 @@ function LoginPage() {
   const dispatch = useDispatch();
 
   const handleSubmit = () => {
-    navigate('/signin');
-    dispatch(logout());
-  }
+    navigate("/signin");
+  };
 
   return (
     <MainContainer>
-      <LeftSection sx={{width: { xs: '100%', md: '50%' },}}>
-        <Formik
-        >
-          {({ }) => (
+      <LeftSection sx={{ width: { xs: "100%", md: "50%" } }}>
+        <Formik>
+          {({}) => (
             <Form
               sx={{
                 display: "flex",
-                alignItems: "center"
-              }}>
+                alignItems: "center",
+              }}
+            >
               <Typography
                 variant="body"
                 gutterBottom
@@ -69,14 +63,14 @@ function LoginPage() {
                   fontWeight: 800,
                   // color: "#0477C5",
                   display: "flex",
-                  justifyContent: "center"
+                  justifyContent: "center",
                 }}
               >
                 Want to Log out ?
               </Typography>
               <Typography
                 gutterBottom
-                varient='body'
+                varient="body"
                 sx={{
                   // fontFamily:
                   //   "sharp-sans-bold, fallback-font, Arial, sans-serif",
@@ -91,7 +85,7 @@ function LoginPage() {
                   justifyContent: "center",
                 }}
               >
-                Are you sure ?         
+                Are you sure ?
               </Typography>
               <Button
                 variant="contained"
@@ -112,11 +106,12 @@ function LoginPage() {
             </Form>
           )}
         </Formik>
-      </LeftSection >
+      </LeftSection>
       <RightSection
         sx={{
-          display: { xs: 'none', sm: 'none', md: 'block' },
-        }}/>
+          display: { xs: "none", sm: "none", md: "block" },
+        }}
+      />
     </MainContainer>
   );
 }

@@ -9,14 +9,12 @@ import {
   Link,
   FormControlLabel,
   Checkbox,
-  Paper
+  Paper,
 } from "@mui/material";
 import { styled } from "@mui/system";
 import { Link as RouterLink } from "react-router-dom";
 import { Formik, Form, Field, ErrorMessage } from "formik";
 import * as Yup from "yup";
-import { login } from "../../../store/slices/authSlices";
-
 
 const MainContainer = styled(Grid)({
   height: "100vh",
@@ -56,66 +54,72 @@ function LoginPage() {
 
   return (
     <MainContainer>
-      <LeftSection sx={{width: { xs: '100%', md: '50%' },'.css-1t8l2tu-MuiInputBase-input-MuiOutlinedInput-input':{height: "15px"}}}>
+      <LeftSection
+        sx={{
+          width: { xs: "100%", md: "50%" },
+          ".css-1t8l2tu-MuiInputBase-input-MuiOutlinedInput-input": {
+            height: "15px",
+          },
+        }}
+      >
         <Formik
           initialValues={{
             email: "",
             password: "",
-            rememberMe: false, 
+            rememberMe: false,
           }}
           validationSchema={validationSchema}
           onSubmit={(values) => {
             console.log(values, "values");
-            dispatch(login())
             navigate("/analytics");
           }}
         >
           {({ handleSubmit }) => (
             <Form>
               <Grid item xs={12} marginBottom={1}>
-              <Typography
-                // variant="h4"
-                gutterBottom
-                sx={{
-                  fontSize: "24px",
-                  lineHeight: "32px",
-                  letterSpacing: "0em",
-                  textTransform: "none",
-                  fontWeight: 800,
-                  marginBottom: '25px'
-                  // color: "#4C4C4C",
-                }}
-              >
-                Hey, good to see you
-              </Typography>
+                <Typography
+                  // variant="h4"
+                  gutterBottom
+                  sx={{
+                    fontSize: "24px",
+                    lineHeight: "32px",
+                    letterSpacing: "0em",
+                    textTransform: "none",
+                    fontWeight: 800,
+                    marginBottom: "25px",
+                    // color: "#4C4C4C",
+                  }}
+                >
+                  Hey, good to see you
+                </Typography>
               </Grid>
               <Grid item xs={12} marginBottom={1}>
-              <Typography
-                // variant="h6"
-                sx={{
-                  fontSize: "20px",
-                  lineHeight: "32px",
-                  letterSpacing: "0em",
-                  textTransform: "none",
-                  fontWeight: 800,
-                  marginBottom: '15px'
-                  // color: "#0477C5",
-                }}
-              >
-                Let's Sign in you
-              </Typography>
+                <Typography
+                  // variant="h6"
+                  sx={{
+                    fontSize: "20px",
+                    lineHeight: "32px",
+                    letterSpacing: "0em",
+                    textTransform: "none",
+                    fontWeight: 800,
+                    marginBottom: "15px",
+                    // color: "#0477C5",
+                  }}
+                >
+                  Let's Sign in you
+                </Typography>
               </Grid>
               <Grid container spacing={2}>
                 <Grid item xs={12}>
                   <Paper elevation={5}>
-                  <Field
-                    as={TextField}
-                    variant="outlined"
-                    fullWidth
-                    placeholder="Email"
-                    name="email"
-                    size='small'
-                  />
+                    <Field
+                      as={TextField}
+                      variant="outlined"
+                      fullWidth
+                      placeholder="Email"
+                      name="email"
+                      size="small"
+                    />
                   </Paper>
                   <ErrorMessage
                     name="email"
@@ -125,15 +129,15 @@ function LoginPage() {
                 </Grid>
                 <Grid item xs={12}>
                   <Paper elevation={3}>
-                  <Field
-                    as={TextField}
-                    variant="outlined"
-                    fullWidth
-                    size='small'
-                    placeholder="Password"
-                    name="password"
-                    type="password"
-                  />
+                    <Field
+                      as={TextField}
+                      variant="outlined"
+                      fullWidth
+                      size="small"
+                      placeholder="Password"
+                      name="password"
+                      type="password"
+                    />
                   </Paper>
                   <ErrorMessage
                     name="password"
@@ -147,21 +151,21 @@ function LoginPage() {
                   sx={{ display: "flex", justifyContent: "space-between" }}
                 >
                   <Grid>
-                  <FormControlLabel
-                    control={
-                      <Checkbox
-                        name="rememberMe"
-                        color="primary"
-                        size="small"
-                      />
-                    }
-                    label="Remember me"
-                  />
-                  <ErrorMessage
-                    name="rememberMe"
-                    component="div"
-                    style={{ color: "red" }}
-                  />
+                    <FormControlLabel
+                      control={
+                        <Checkbox
+                          name="rememberMe"
+                          color="primary"
+                          size="small"
+                        />
+                      }
+                      label="Remember me"
+                    />
+                    <ErrorMessage
+                      name="rememberMe"
+                      component="div"
+                      style={{ color: "red" }}
+                    />
                   </Grid>
                   <Grid>
                     <Typography
@@ -172,7 +176,11 @@ function LoginPage() {
                         cursor: "pointer",
                       }}
                     >
-                      <Link color= 'primary' component={RouterLink} to="/forgotPassword">
+                      <Link
+                        color="primary"
+                        component={RouterLink}
+                        to="/forgotPassword"
+                      >
                         Forgot Password?
                       </Link>
                     </Typography>
@@ -186,8 +194,8 @@ function LoginPage() {
                   marginTop: "16px",
                   color: "#FFF",
                   marginBottom: "16px",
-                  height: "40px", 
-                  fontWeight: 700
+                  height: "40px",
+                  fontWeight: 700,
                 }}
                 onClick={handleSubmit}
               >
@@ -196,11 +204,12 @@ function LoginPage() {
             </Form>
           )}
         </Formik>
-      </LeftSection >
+      </LeftSection>
       <RightSection
         sx={{
-          display: { xs: 'none', sm: 'none', md: 'block' },
-        }}/>
+          display: { xs: "none", sm: "none", md: "block" },
+        }}
+      />
     </MainContainer>
   );
 }

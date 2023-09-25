@@ -8,10 +8,6 @@ import Loadable from "./ui-component/Loadable";
 import useBoxStyles from "./theme/main-layout";
 import './index.css'
 
-import { selectIsAuthenticated } from "./store/slices/authSlices";
-
-
-
 // header and sidenav
 const Header = lazy(() => import("./views/Header"));
 const SideNav = lazy(() => import("./views/Side-Nav"));
@@ -30,10 +26,6 @@ const NotFound = lazy(() => import('./views/errors'));
 
 function App() {
 
-  const ProtectedRoute = ({ element }) => {
-    return isAuthenticated ? element : <Navigate to="/signin" />;
-  };
-  const isAuthenticated = useSelector(selectIsAuthenticated);
   
   const styles = useBoxStyles();
 
@@ -56,8 +48,8 @@ function App() {
         {/* Main Routes */}
         <Box sx={styles.box}>
           <Routes>
-            <Route path="/analytics" element={<ProtectedRoute element={<Analytics />} />} />
-            <Route path="/patients" element={<ProtectedRoute element={<Patients />} />}/>
+            <Route path="/analytics"  element={<Analytics />}  />
+            <Route path="/patients"  element={<Patients />} />
           </Routes>
       </Box>
       </Suspense>
