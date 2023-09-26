@@ -1,57 +1,76 @@
-import React , { lazy, Suspense } from "react";
-import { BrowserRouter as Router, Route, Routes, Navigate } from "react-router-dom";
-import { useSelector } from "react-redux";
+import React, { lazy, Suspense, useEffect, useState } from "react";
+import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import { Box } from "@mui/material";
-
 import Snackbar from "./ui-component/snackbar";
 import Loadable from "./ui-component/Loadable";
 import useBoxStyles from "./theme/main-layout";
-import './index.css'
+import "./index.css";
+import { AuthRoutes } from "./routes/AuthRoutes";
+import { Provider } from "./routes/ProviderRoutes";
+import { Admin } from "./routes/AdminRoutes";
+import { User } from "./routes/UserRoutes";
 
 // header and sidenav
 const Header = lazy(() => import("./views/Header"));
 const SideNav = lazy(() => import("./views/Side-Nav"));
+const NotFound = lazy(() => import("./views/errors"));
 
-// main component
-const Analytics = lazy(() => import("./views/workspaces/Dashboard"));
-const Patients = lazy(() => import("./views/workspaces/Patients"));
+export const loggedInUserType = "Provider";
 
-// auth component
-const Signin = lazy(() => import('./views/authentication/sign-in'));
-const ForgotPassword = lazy(() => import('./views/authentication/forgot-password/forgot'));
-const OTP = lazy(() => import('./views/authentication/forgot-password/OTP'));
-const ResetPassword = lazy(() => import('./views/authentication/forgot-password/reset'));
-const Logout = lazy(() => import('./views/authentication/log-out'));
-const NotFound = lazy(() => import('./views/errors'));
-
-function App() {
-
-  
+function App(props) {
   const styles = useBoxStyles();
+  const loggedIn = true;
+
+  const [routes, setRoutes] = useState([]);
+  console.log("@@@@@@@@@@@@", props);
+  useEffect(() => {
+    if (loggedIn) {
+      if (loggedInUserType === "Admin") {
+        setRoutes([...Admin, ...AuthRoutes]);
+      } else if (loggedInUserType === "Provider") {
+        setRoutes([...Provider, ...AuthRoutes]);
+      } else if (loggedInUserType === "User") {
+        setRoutes([...User, ...AuthRoutes]);
+      }
+    } else {
+      // Unauthorized users
+      setRoutes(AuthRoutes);
+    }
+  }, [loggedInUserType, loggedIn]);
 
   return (
     <Router>
-      <Header />
-      <SideNav/>
       <Suspense fallback={<Loadable />}>
-        {/* Auth Routes */}
-        <Routes>
-          <Route path="/" element={<Signin />} />
-          <Route path="/signin" element={<Signin />} />
-          <Route path="/forgotPassword" element={<ForgotPassword />} />
-          <Route path="/otp" element={<OTP/>} />
-          <Route path="/resetPassword" element={<ResetPassword/>} />
-          <Route path="/logout" element={<Logout />} />
-          {/* Not Found Route */}
-          <Route  element={<NotFound />} />
-        </Routes>
-        {/* Main Routes */}
-        <Box sx={styles.box}>
+        {loggedIn ? (
+          <>
+            <Header />
+            <SideNav />
+            <Box sx={styles.box}>
+              <Routes>
+                {routes?.map((route) => (
+                  <Route
+                    key={route?.url}
+                    path={route?.url}
+                    element={route?.element}
+                  />
+                ))}
+                <Route path="*" element={<NotFound />} />
+              </Routes>
+            </Box>
+          </>
+        ) : (
           <Routes>
-            <Route path="/analytics"  element={<Analytics />}  />
-            <Route path="/patients"  element={<Patients />} />
+            {routes?.map((route) => (
+              <Route
+                key={route?.url}
+                path={route?.url}
+                element={route?.element}
+              />
+            ))}
+            {/* Add conditions for authenticated routes */}
+            <Route path="*" element={<NotFound />} />
           </Routes>
-      </Box>
+        )}
       </Suspense>
       <Snackbar />
     </Router>
@@ -59,4 +78,3 @@ function App() {
 }
 
 export default App;
-
