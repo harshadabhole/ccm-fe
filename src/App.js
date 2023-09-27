@@ -17,12 +17,11 @@ const NotFound = lazy(() => import("./views/errors"));
 
 export const loggedInUserType = "Provider";
 
-function App(props) {
+function App() {
   const styles = useBoxStyles();
   const loggedIn = true;
-
   const [routes, setRoutes] = useState([]);
-  console.log("@@@@@@@@@@@@", props);
+
   useEffect(() => {
     if (loggedIn) {
       if (loggedInUserType === "Admin") {
@@ -33,15 +32,20 @@ function App(props) {
         setRoutes([...User, ...AuthRoutes]);
       }
     } else {
-      // Unauthorized users
+      // set auth routes
       setRoutes(AuthRoutes);
     }
   }, [loggedInUserType, loggedIn]);
 
+  const allAuthRouteUrls = [...AuthRoutes].map((route) => route?.url);
+  const allProtectedRouteUrls = [...Admin, ...Provider, ...User].map(
+    (route) => route?.url
+  );
+
   return (
     <Router>
       <Suspense fallback={<Loadable />}>
-        {loggedIn ? (
+        {loggedIn && !allAuthRouteUrls.includes(window.location.pathname) ? (
           <>
             <Header />
             <SideNav />
@@ -54,7 +58,8 @@ function App(props) {
                     element={route?.element}
                   />
                 ))}
-                <Route path="*" element={<NotFound />} />
+                {/* show not found page */}
+                <Route path="*" element={<NotFound loggedIn={true} />} />
               </Routes>
             </Box>
           </>
@@ -67,8 +72,22 @@ function App(props) {
                 element={route?.element}
               />
             ))}
-            {/* Add conditions for authenticated routes */}
-            <Route path="*" element={<NotFound />} />
+            <Route
+              path="*"
+              element={
+                // Check if the requested route exists in your application's routes
+                allProtectedRouteUrls?.includes(window.location.pathname) ? (
+                  // show access denied page
+                  <NotFound loggedIn={false} />
+                ) : ![...allProtectedRouteUrls, ...allAuthRouteUrls].includes(
+                    window.location.pathname
+                  ) ? (
+                  <NotFound loggedIn={true} />
+                ) : (
+                  null
+                )
+              }
+            />
           </Routes>
         )}
       </Suspense>
