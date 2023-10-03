@@ -16,7 +16,7 @@ import {
 } from "../assets/Icons/SideBarIcons";
 
 // Provider component
-const Analytics = lazy(() => import("../views/workspaces/Dashboard"));
+const Analytics = lazy(() => import("../views/workspaces/Analytics"));
 const Patients = lazy(() => import("../views/workspaces/Patients"));
 const Logout = lazy(() => import("../views/authentication/log-out"));
 
