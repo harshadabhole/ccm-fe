@@ -5,7 +5,7 @@ const ProgramCard = ({item}) => {
   return (
     <Card sx={{boxShadow: 3, height:200}}>
       <CardContent>
-        <Grid container spacing={2}>
+        <Grid container spacing={1}>
           <Grid item xs={12}>
             <Typography>{item.text}</Typography>
           </Grid>
@@ -14,7 +14,7 @@ const ProgramCard = ({item}) => {
           </Grid>
         </Grid>
         <Divider orientation="horizontal" flexItem/>
-        <Typography mt={1}>Eligible for billing CPT code</Typography>
+        <Typography mt={1} mb={3}>Eligible for billing CPT code</Typography>
       </CardContent>
     </Card>
   )

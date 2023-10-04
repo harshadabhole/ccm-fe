@@ -9,8 +9,8 @@ import { AuthRoutes } from "./routes/AuthRoutes";
 import { Provider } from "./routes/ProviderRoutes";
 import { Admin } from "./routes/AdminRoutes";
 import { User } from "./routes/UserRoutes";
-import { toggleDrawer } from "./store/slices/drawerSlices";
 import { useDispatch, useSelector } from "react-redux";
+import { closeDrawer } from "./store/slices/drawerSlices";
 // header and sidenav
 const Header = lazy(() => import("./views/Header"));
 const SideNav = lazy(() => import("./views/Side-Nav"));
@@ -43,6 +43,14 @@ function App() {
   const allProtectedRouteUrls = [...Admin, ...Provider, ...User].map(
     (route) => route?.url
   );
+
+  useEffect(() => {
+    console.log("###########",!loggedIn , allAuthRouteUrls.includes(window.location.pathname))
+    if(allAuthRouteUrls.includes(window.location.pathname))
+    dispatch(closeDrawer())
+  },[loggedIn, window.location.pathname])
+
+  
 
   return (
     <Router>

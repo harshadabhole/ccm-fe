@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import {
@@ -15,7 +15,7 @@ import { styled } from "@mui/system";
 import { Link as RouterLink } from "react-router-dom";
 import { Formik, Form, Field, ErrorMessage } from "formik";
 import * as Yup from "yup";
-import { toggleDrawer } from "../../../store/slices/drawerSlices";
+import { closeDrawer, openDrawer, toggleDrawer } from "../../../store/slices/drawerSlices";
 
 const MainContainer = styled(Grid)({
   height: "100vh",
@@ -46,6 +46,10 @@ function LoginPage() {
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
+  // useEffect(() => {
+  //   dispatch(closeDrawer())
+  // })
+  
   const validationSchema = Yup.object().shape({
     email: Yup.string()
       .email("Invalid email format")
@@ -71,7 +75,7 @@ function LoginPage() {
           }}
           validationSchema={validationSchema}
           onSubmit={(values) => {
-            dispatch(toggleDrawer());
+            dispatch(openDrawer());
             navigate("/analytics");
           }}
         >
