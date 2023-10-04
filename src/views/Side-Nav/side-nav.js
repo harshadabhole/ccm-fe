@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { useLocation, useNavigate } from "react-router-dom";
 import {
   Box,
@@ -13,16 +13,18 @@ import {
 import Collapse from "@mui/material/Collapse";
 import KeyboardArrowUpIcon from "@mui/icons-material/KeyboardArrowUp";
 import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
-import { toggleDrawer } from "../../store/slices/drawerSlices";
+import { closeDrawer, toggleDrawer } from "../../store/slices/drawerSlices";
 import { drawerWidth } from "../../ccm-constant";
 import { menus } from "./menus";
 
 export const SideNav = () => {
+  const dispatch = useDispatch();
   const [selectedItem, setSelectedItem] = useState("Analytics");
   const [openGroups, setOpenGroups] = useState({});
   const navigate = useNavigate();
   const store = useSelector((state) => state);
   console.log("store", store);
+  console.log("selectedItem",selectedItem)
 
   const location = useLocation();
   const routesWithoutHeader = [
@@ -33,6 +35,15 @@ export const SideNav = () => {
     "/logout",
     "/",
   ];
+
+
+  useEffect(() => {
+  if(selectedItem === "Logout")
+  {
+    dispatch(closeDrawer())
+  }
+  }, [selectedItem])
+  
 
   // Create a state object to track the open state of each group
   const toggleGroup = (groupId) => {

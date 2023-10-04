@@ -15,6 +15,7 @@ import { styled } from "@mui/system";
 import { Link as RouterLink } from "react-router-dom";
 import { Formik, Form, Field, ErrorMessage } from "formik";
 import * as Yup from "yup";
+import { toggleDrawer } from "../../../store/slices/drawerSlices";
 
 const MainContainer = styled(Grid)({
   height: "100vh",
@@ -70,7 +71,7 @@ function LoginPage() {
           }}
           validationSchema={validationSchema}
           onSubmit={(values) => {
-            console.log(values, "values");
+            dispatch(toggleDrawer());
             navigate("/analytics");
           }}
         >

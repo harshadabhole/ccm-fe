@@ -9,7 +9,8 @@ import { AuthRoutes } from "./routes/AuthRoutes";
 import { Provider } from "./routes/ProviderRoutes";
 import { Admin } from "./routes/AdminRoutes";
 import { User } from "./routes/UserRoutes";
-
+import { toggleDrawer } from "./store/slices/drawerSlices";
+import { useDispatch, useSelector } from "react-redux";
 // header and sidenav
 const Header = lazy(() => import("./views/Header"));
 const SideNav = lazy(() => import("./views/Side-Nav"));
@@ -18,6 +19,7 @@ const NotFound = lazy(() => import("./views/errors"));
 export const loggedInUserType = "Provider";
 
 function App() {
+  const dispatch = useDispatch();
   const styles = useBoxStyles();
   const loggedIn = true;
   const [routes, setRoutes] = useState([]);
@@ -47,6 +49,7 @@ function App() {
       <Suspense fallback={<Loadable />}>
         {loggedIn && !allAuthRouteUrls.includes(window.location.pathname) ? (
           <>
+            {console.log("loggedIn1", loggedIn)}
             <Header />
             <SideNav />
             <Box sx={styles.box}>
@@ -59,12 +62,16 @@ function App() {
                   />
                 ))}
                 {/* show not found page */}
-                <Route path="*" element={<NotFound loggedIn={true} />} />
+                <Route
+                  path="*"
+                  element={<NotFound loggedIn={!loggedIn ? true : false} />}
+                />
               </Routes>
             </Box>
           </>
         ) : (
           <Routes>
+            {console.log("loggedIn2", loggedIn)}
             {routes?.map((route) => (
               <Route
                 key={route?.url}
@@ -76,6 +83,7 @@ function App() {
               path="*"
               element={
                 // Check if the requested route exists in your application's routes
+                !loggedIn &&
                 allProtectedRouteUrls?.includes(window.location.pathname) ? (
                   // show access denied page
                   <NotFound loggedIn={false} />
@@ -83,9 +91,7 @@ function App() {
                     window.location.pathname
                   ) ? (
                   <NotFound loggedIn={true} />
-                ) : (
-                  null
-                )
+                ) : null
               }
             />
           </Routes>
