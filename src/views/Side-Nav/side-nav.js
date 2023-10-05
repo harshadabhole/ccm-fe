@@ -16,6 +16,9 @@ import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
 import { closeDrawer, toggleDrawer } from "../../store/slices/drawerSlices";
 import { drawerWidth } from "../../ccm-constant";
 import { menus } from "./menus";
+import userProfilePhoto from "../../assets/avatar-s-11.jpg"
+import { CustomScrollbars } from "../../ui-component/ScrollBar";
+import UserProfile from "../workspaces/UserDetails/UserProfile";
 
 export const SideNav = () => {
   const dispatch = useDispatch();
@@ -177,19 +180,27 @@ export const SideNav = () => {
             width: drawerWidth,
             boxSizing: "border-box",
             marginTop: "64px",
-          },
-          display: "flex",
-          alignItems: "center",
+            display: "flex", // Use flex display
+            flexDirection: "column", // Column layout for the drawer content
+            alignItems: "center", // Center the content vertically
+            justifyContent: "space-between", // Space between content
+            },
+      
         }}
         variant="persistent"
         anchor="left"
         open={store.drawer.open}
         onClose={toggleDrawer}
       >
-        <Box sx={{ width: "80%", marginLeft: "25px", marginTop: "10px" }}>
-          {renderMenuItems(menus.children)}
+        <CustomScrollbars height={window.screen.height}>
+          <Box sx={{ width: "80%", marginLeft: "25px", marginTop: "10px" }}>
+            {renderMenuItems(menus.children)}
+          </Box>
+        </CustomScrollbars>
+        <Box sx={{ width: "90%", marginLeft: "20px", marginBottom: "8vh" }}>
+          <UserProfile photo={userProfilePhoto} name={"User Name"} />
         </Box>
       </Drawer>
     </Grid>
-  );
+  )
 };

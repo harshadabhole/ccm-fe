@@ -23,13 +23,28 @@ function App() {
   const styles = useBoxStyles();
   const loggedIn = true;
   const [routes, setRoutes] = useState([]);
+  const [childRoute, setChildRoute] = useState([])
 
   useEffect(() => {
     if (loggedIn) {
       if (loggedInUserType === "Admin") {
-        setRoutes([...Admin, ...AuthRoutes]);
+        let childRoutes = []
+        Admin.forEach((route)=>{
+          if(route?.children){
+            childRoutes.push(...route?.children)
+          }
+        })
+        setChildRoute(childRoutes)
+        setRoutes([...Admin, ...AuthRoutes, ...childRoutes]);
       } else if (loggedInUserType === "Provider") {
-        setRoutes([...Provider, ...AuthRoutes]);
+        let childRoutes = []
+        Provider.forEach((route)=>{
+          if(route?.children){
+            childRoutes.push(...route?.children)
+          }
+        })
+        setChildRoute(childRoutes)
+        setRoutes([...Provider, ...AuthRoutes, ...childRoutes]);
       } else if (loggedInUserType === "User") {
         setRoutes([...User, ...AuthRoutes]);
       }
@@ -40,12 +55,11 @@ function App() {
   }, [loggedInUserType, loggedIn]);
 
   const allAuthRouteUrls = [...AuthRoutes].map((route) => route?.url);
-  const allProtectedRouteUrls = [...Admin, ...Provider, ...User].map(
+  const allProtectedRouteUrls = [...Admin, ...Provider, ...User, ...childRoute].map(
     (route) => route?.url
   );
 
   useEffect(() => {
-    console.log("###########",!loggedIn , allAuthRouteUrls.includes(window.location.pathname))
     if(allAuthRouteUrls.includes(window.location.pathname))
     dispatch(closeDrawer())
   },[loggedIn, window.location.pathname])

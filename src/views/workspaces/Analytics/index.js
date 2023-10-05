@@ -10,6 +10,7 @@ import {
 import PatientCard from "./components/patient-card";
 import TaskCard from "./components/task-card";
 import ProgramCard from "./components/program-card";
+import { CustomScrollbars } from "../../../ui-component/ScrollBar";
 
 const Analytics = () => {
   const patientCard = [
@@ -77,7 +78,7 @@ const Analytics = () => {
 
   return (
     <Grid container spacing={2} padding={3}>
-      <Grid item xs={12} padding={3}>
+      <Grid item xs={12}>
         <Grid container spacing={3}>
           {patientCard.map((item, index) => (
             <Grid item xs={12} sm={6} md={6} lg={2.4} xl={2.4} key={index}>
@@ -87,7 +88,8 @@ const Analytics = () => {
         </Grid>
       </Grid>
       <Grid item xs={12} md={6}>
-        <Card sx={{ boxShadow: 5, height: 450 }}>
+        <Card sx={{ boxShadow: 5, height: 450 }} spacing={2} >
+        <CustomScrollbars height={440}>
           <CardContent>
             <Grid container spacing={2}>
               {programData?.map((item, index) => (
@@ -97,6 +99,7 @@ const Analytics = () => {
               ))}
             </Grid>
           </CardContent>
+          </CustomScrollbars>
         </Card>
       </Grid>
       <Grid item xs={12} sm={12} md={6} lg={3} xl={3}>

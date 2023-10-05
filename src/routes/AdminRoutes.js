@@ -6,6 +6,8 @@ import {
   LogoutRoundedIcon,
   TaskOutlinedIcon,
 } from "../assets/Icons/SideBarIcons";
+import Password from "../views/workspaces/Settings/Components/Password";
+import AdminUser from "../views/workspaces/Settings/Components/AdminUser/Index";
 
 // Provider component
 const Analytics = lazy(() => import("../views/workspaces/Dashboard"));
@@ -42,10 +44,28 @@ export const Admin = [
   {
     id: "settings",
     title: "Settings",
-    type: "item",
+    type: "group",
     icon: <SettingsOutlinedIcon />,
     url: "/settings",
     breadcrumbs: true,
+    children: [
+      {
+        id: "password",
+        title: "Password",
+        type: "item",
+        icon: <AccountCircleRoundedIcon />,
+        url: "/settings/password",
+        element: <Password />,
+      },
+      {
+        id: "adminUser",
+        title: "Admin user",
+        type: "item",
+        icon: <AccountCircleRoundedIcon />,
+        url: "/settings/adminUser",
+        element: <AdminUser />,
+      },
+    ],
   },
   {
     id: "logout",
