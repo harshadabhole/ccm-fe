@@ -11,7 +11,7 @@ import AdminUser from "../views/workspaces/Settings/Components/AdminUser/Index";
 
 // Provider component
 const Analytics = lazy(() => import("../views/workspaces/Dashboard"));
-const Patients = lazy(() => import("../views/workspaces/Patients"));
+const Provider = lazy(() => import("../views/workspaces/Provider"));
 const Logout = lazy(() => import("../views/authentication/log-out"));
 
 export const Admin = [
@@ -31,7 +31,7 @@ export const Admin = [
     icon: <AccountCircleRoundedIcon />,
     url: `/provider-group`,
     breadcrumbs: true,
-    element: <Patients />,
+    element: <Provider />,
   },
   {
     id: "devices",

@@ -16,7 +16,7 @@ const Header = lazy(() => import("./views/Header"));
 const SideNav = lazy(() => import("./views/Side-Nav"));
 const NotFound = lazy(() => import("./views/errors"));
 
-export const loggedInUserType = "Provider";
+export const loggedInUserType = "Admin";
 
 function App() {
   const dispatch = useDispatch();
