@@ -34,16 +34,7 @@ export const SideNav = () => {
     "/otp",
     "/logout",
     "/",
-  ];
-
-
-  useEffect(() => {
-  if(selectedItem === "Logout")
-  {
-    dispatch(closeDrawer())
-  }
-  }, [selectedItem])
-  
+  ];  
 
   // Create a state object to track the open state of each group
   const toggleGroup = (groupId) => {
