@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import DataTable from "react-data-table-component";
 import { ChevronDown } from "react-feather";
 import ArrowBackIosNewOutlinedIcon from "@mui/icons-material/ArrowBackIosNewOutlined";
@@ -16,72 +17,79 @@ import AddProvider from "../../feature/Add-Provider/add-provider-form";
 
 const data = [
   {
-    provider_group_name: "John Smith",
-    specialty: "Arthopedics",
-    address: "New York",
-    contact: "+1 702 216 7305",
+    provider_group_name: "New York Hospital",
+    specialty: "Orthopedics",
+    address: "123 Main Street, New York, NY",
+    contact: "+1 555-123-4567",
   },
   {
-    provider_group_name: "Jane Doe",
-    specialty: "Nuro",
-    address: "San Francisco",
-    contact: "+1 702 216 7305",
+    provider_group_name: "San Francisco General Hospital",
+    specialty: "Neurology",
+    address: "456 Elm Avenue, San Francisco, CA",
+    contact: "+1 555-234-5678",
+    status: "On", // Added status key
   },
   {
-    provider_group_name: "Jane Doe",
-    specialty: "Nuro",
-    address: "San Francisco",
-    contact: "+1 702 216 7305",
+    provider_group_name: "Chicago Medical Center",
+    specialty: "Cardiology",
+    address: "789 Oak Road, Chicago, IL",
+    contact: "+1 555-345-6789",
+    status: "On", // Added status key
   },
   {
-    provider_group_name: "Jane Doe",
-    specialty: "Nuro",
-    address: "San Francisco",
-    contact: "+1 702 216 7305",
+    provider_group_name: "Los Angeles Healthcare",
+    specialty: "Pediatrics",
+    address: "101 Willow Lane, Los Angeles, CA",
+    contact: "+1 555-456-7890",
   },
   {
-    provider_group_name: "Aane Doe",
-    specialty: "Nuro",
-    address: "San Francisco",
-    contact: "+1 702 216 7303",
+    provider_group_name: "Boston Children's Hospital",
+    specialty: "Pediatrics",
+    address: "555 Maple Street, Boston, MA",
+    contact: "+1 555-567-8901",
+    status: "On", // Added status key
   },
   {
-    provider_group_name: "Jane Doe",
-    specialty: "Nuro",
-    address: "San Francisco",
-    contact: "+1 702 216 7304",
+    provider_group_name: "Houston Medical Center",
+    specialty: "Oncology",
+    address: "222 Pine Avenue, Houston, TX",
+    contact: "+1 555-678-9012",
   },
   {
-    provider_group_name: "Jane Doe",
-    specialty: "Nuro",
-    address: "San Francisco",
-    contact: "+1 702 216 7305",
+    provider_group_name: "Philadelphia Hospital",
+    specialty: "Dermatology",
+    address: "333 Oak Lane, Philadelphia, PA",
+    contact: "+1 555-789-0123",
   },
   {
-    provider_group_name: "Jane Doe",
-    specialty: "Nuro",
-    address: "San Francisco",
-    contact: "+1 702 216 7305",
+    provider_group_name: "Miami Healthcare",
+    specialty: "Radiology",
+    address: "444 Cedar Road, Miami, FL",
+    contact: "+1 555-890-1234",
   },
   {
-    provider_group_name: "Jane Doe",
-    specialty: "Nuro",
-    address: "San Francisco",
-    contact: "+1 702 216 7305",
+    provider_group_name: "Seattle Medical Center",
+    specialty: "Emergency Medicine",
+    address: "777 Birch Street, Seattle, WA",
+    contact: "+1 555-901-2345",
+    status: "On", // Added status key
   },
   {
-    provider_group_name: "Jane Doe",
-    specialty: "Nuro",
-    address: "San Francisco",
-    contact: "+1 702 216 7305",
+    provider_group_name: "Dallas General Hospital",
+    specialty: "Gastroenterology",
+    address: "888 Oak Avenue, Dallas, TX",
+    contact: "+1 555-012-3456",
   },
   {
-    provider_group_name: "Jane Doe",
-    specialty: "Nuro",
-    address: "San Francisco",
-    contact: "+1 702 216 7305",
+    provider_group_name: "Atlanta Healthcare",
+    specialty: "Urology",
+    address: "999 Elm Drive, Atlanta, GA",
+    contact: "+1 555-123-4567",
   },
+  // Add more hospitals as needed with status key
 ];
+
+
 
 const ProviderTable = () => {
   const columns = [
@@ -121,6 +129,7 @@ const ProviderTable = () => {
   const [selectedRow, setSelectedRow] = useState(null);
   console.log(selectedRow, "selectedRow");
   const [open, setOpen] = useState(false);
+  const navigate = useNavigate();
 
   const handleOpen = () => {
     setOpen(true);
@@ -159,6 +168,7 @@ const ProviderTable = () => {
 
   const handleRowClick = (row) => {
     setSelectedRow(row);
+    navigate(`/provider-group/${row.provider_group_name}`)
     // You can perform any actions you need with the selected row here
     console.log("Selected Row:", row);
   };

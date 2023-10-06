@@ -13,6 +13,9 @@ import {
   RadioGroup,
   Radio,
   Input,
+  CardContent,
+  Card,
+  IconButton,
 } from "@mui/material";
 import { FileUploader } from "react-drag-drop-files";
 import { styled } from "@mui/system";
@@ -20,11 +23,12 @@ import { Link as RouterLink } from "react-router-dom";
 import CloudUploadIcon from "@mui/icons-material/CloudUpload";
 import { Formik, Form, Field, ErrorMessage } from "formik";
 import * as Yup from "yup";
-import { openDrawer } from "../../../../../store/slices/drawerSlices";
+import { IconUpload } from "@tabler/icons-react";
 
 const MainContainer = styled(Grid)({
   height: "100vh",
   display: "flex",
+  marginTop: "20px",
 });
 
 function AddProvider() {
@@ -61,14 +65,30 @@ function AddProvider() {
 
   const DropBox = () => {
     return (
-      <Grid container spacing={1}>
-        <CloudUploadIcon/>
-        <Typography>Drop Logo Here</Typography>
+      <Grid container>
+        <Card
+          sx={{
+            height: "20vh",
+            width: "50vw",
+            // marginLeft: "12px",
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "center",
+            boxShadow: 5,
+          }}
+        >
+          <CardContent>
+            <IconButton sx={{ marginLeft: "32px" }}>
+              <IconUpload color="#42427C" />
+            </IconButton>
+            <Typography>Drop Logo Here</Typography>
+          </CardContent>
+        </Card>
       </Grid>
-    )
-  }
+    );
+  };
 
-  const content = DropBox()
+  const content = DropBox();
 
   return (
     <MainContainer>
@@ -104,7 +124,7 @@ function AddProvider() {
                 <Typography
                   // variant="h6"
                   sx={{
-                    fontSize: "18px",
+                    fontSize: "20px",
                     lineHeight: "32px",
                     letterSpacing: "0em",
                     textTransform: "none",
@@ -196,7 +216,9 @@ function AddProvider() {
               </Grid>
               <Grid container spacing={3}>
                 <Grid item xs={6}>
-                  <Typography variant="h6">Provider Group Name</Typography>
+                  <Typography variant="subtitle1">
+                    Provider Group Name
+                  </Typography>
                   <Paper elevation={5}>
                     <Field
                       as={TextField}
@@ -213,7 +235,7 @@ function AddProvider() {
                   />
                 </Grid>
                 <Grid item xs={6}>
-                  <Typography variant="h6">Address Line 1</Typography>
+                  <Typography variant="subtitle1">Address Line 1</Typography>
                   <Paper elevation={3}>
                     <Field
                       as={TextField}
@@ -230,7 +252,7 @@ function AddProvider() {
                   />
                 </Grid>
                 <Grid item xs={6}>
-                  <Typography variant="h6">Email Id</Typography>
+                  <Typography variant="subtitle1">Email Id</Typography>
                   <Paper elevation={3}>
                     <Field
                       as={TextField}
@@ -247,7 +269,7 @@ function AddProvider() {
                   />
                 </Grid>
                 <Grid item xs={6}>
-                  <Typography variant="h6">Address Line 2</Typography>
+                  <Typography variant="subtitle1">Address Line 2</Typography>
                   <Paper elevation={3}>
                     <Field
                       as={TextField}
@@ -264,7 +286,7 @@ function AddProvider() {
                   />
                 </Grid>
                 <Grid item xs={6}>
-                  <Typography variant="h6">Phone Number</Typography>
+                  <Typography variant="subtitle1">Phone Number</Typography>
                   <Paper elevation={3}>
                     <Field
                       as={TextField}
@@ -281,7 +303,7 @@ function AddProvider() {
                   />
                 </Grid>
                 <Grid item xs={6}>
-                  <Typography variant="h6">Country</Typography>
+                  <Typography variant="subtitle1">Country</Typography>
                   <Paper elevation={3}>
                     <Field
                       as={TextField}
@@ -298,7 +320,7 @@ function AddProvider() {
                   />
                 </Grid>
                 <Grid item xs={6}>
-                  <Typography variant="h6">Speciality</Typography>
+                  <Typography variant="subtitle1">Speciality</Typography>
                   <Paper elevation={3}>
                     <Field
                       as={TextField}
@@ -315,7 +337,7 @@ function AddProvider() {
                   />
                 </Grid>
                 <Grid item xs={6}>
-                  <Typography variant="h6">State</Typography>
+                  <Typography variant="subtitle1">State</Typography>
                   <Paper elevation={3}>
                     <Field
                       as={TextField}
@@ -332,7 +354,7 @@ function AddProvider() {
                   />
                 </Grid>
                 <Grid item xs={6}>
-                  <Typography variant="h6">Website</Typography>
+                  <Typography variant="subtitle1">Website</Typography>
                   <Paper elevation={3}>
                     <Field
                       as={TextField}
@@ -349,7 +371,7 @@ function AddProvider() {
                   />
                 </Grid>
                 <Grid item xs={6}>
-                  <Typography variant="h6">ZipCode</Typography>
+                  <Typography variant="subtitle1">ZipCode</Typography>
                   <Paper elevation={3}>
                     <Field
                       as={TextField}
@@ -365,21 +387,61 @@ function AddProvider() {
                     style={{ color: "red" }}
                   />
                 </Grid>
-                <Grid item xs={6}>
-                  {/* <Typography variant="h6">Upload Image</Typography> */}
-                  <FileUploader
-                    multiple={true}
-                    handleChange={handleChange}
-                    name="file"
-                    types={fileTypes}
-                    label="Drop Here Logo"
-                    // children={content}
-                  />
-                  <Typography>
-                    {file
-                      ? `File name: ${file[0].name}`
-                      : "no files uploaded yet"}
-                  </Typography>
+                <Grid
+                  container
+                  spacing={3}
+                  sx={{ paddingTop: "24px", paddingLeft: "24px", spacing: 3 }}
+                >
+                  <Grid item xs={6}>
+                    <Typography
+                      // variant="h6"
+                      sx={{
+                        fontSize: "20px",
+                        lineHeight: "32px",
+                        letterSpacing: "0em",
+                        textTransform: "none",
+                        fontWeight: 600,
+                        marginBottom: "15px",
+                        // color: "#0477C5",
+                      }}
+                    >
+                      Physical Address
+                    </Typography>
+                    <Grid item >
+                      <Typography variant="subtitle1">ZipCode</Typography>
+                      <Paper elevation={3}>
+                        <Field
+                          as={TextField}
+                          variant="outlined"
+                          fullWidth
+                          placeholder="ZipCode"
+                          name="zipCode"
+                        />
+                      </Paper>
+                      <ErrorMessage
+                        name="zipCode"
+                        component="div"
+                        style={{ color: "red" }}
+                      />
+                    </Grid>
+                  </Grid>
+                  <Grid item xs={6}>
+                    <FileUploader
+                      multiple={true}
+                      handleChange={handleChange}
+                      name="file"
+                      types={fileTypes}
+                      label="Drop Here Logo"
+                      children={content}
+                    />
+                    <Typography
+                      sx={{ display: "flex", justifyContent: "center" }}
+                    >
+                      {file
+                        ? `File name: ${file[0].name}`
+                        : "no files uploaded yet"}
+                    </Typography>
+                  </Grid>
                 </Grid>
               </Grid>
             </Grid>
@@ -389,7 +451,5 @@ function AddProvider() {
     </MainContainer>
   );
 }
-
-
 
 export default AddProvider;

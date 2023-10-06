@@ -13,6 +13,7 @@ import AdminUser from "../views/workspaces/Settings/Components/AdminUser/Index";
 const Analytics = lazy(() => import("../views/workspaces/Dashboard"));
 const Provider = lazy(() => import("../views/workspaces/Provider"));
 const Logout = lazy(() => import("../views/authentication/log-out"));
+const ProviderProfile = lazy(() => import("../views/workspaces/Provider/components/provider-profile"));
 
 export const Admin = [
   {
@@ -32,6 +33,17 @@ export const Admin = [
     url: `/provider-group`,
     breadcrumbs: true,
     element: <Provider />,
+    children: [
+      {
+      id: "provider-group",
+      title: "Provider Group",
+      type: "item",
+      icon: <AccountCircleRoundedIcon />,
+      url: `/provider-group/:name`,
+      breadcrumbs: true,
+      element: <ProviderProfile />,
+      }
+    ]
   },
   {
     id: "devices",
