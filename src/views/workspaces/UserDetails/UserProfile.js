@@ -25,8 +25,9 @@ function UserProfile({ name, photo }) {
       <div style={{ flex: 1 }}>
         {/* <h4 sx={{ margin: 0, padding: 0 }}>User Name</h4> */}
         <Typography
-            variant="p"
+            variant="h6"
             display="block"
+            sx={{ cursor: 'pointer', fontSize:"20px" }}
           >
             {name}
           </Typography>
@@ -35,7 +36,7 @@ function UserProfile({ name, photo }) {
             variant="button"
             display="block"
             onClick={handleOpenMenu}
-            sx={{ cursor: 'pointer' }}
+            sx={{ cursor: 'pointer', fontWeight:400 }}
           >
             {loggedInUserType}
           </Typography>

@@ -9,14 +9,15 @@ import { AuthRoutes } from "./routes/AuthRoutes";
 import { Provider } from "./routes/ProviderRoutes";
 import { Admin } from "./routes/AdminRoutes";
 import { User } from "./routes/UserRoutes";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch} from "react-redux";
 import { closeDrawer } from "./store/slices/drawerSlices";
+import UserProfileDetails from "./views/workspaces/Settings/Components/AdminUser/UserProfileDetails";
 // header and sidenav
 const Header = lazy(() => import("./views/Header"));
 const SideNav = lazy(() => import("./views/Side-Nav"));
 const NotFound = lazy(() => import("./views/errors"));
 
-export const loggedInUserType = "Provider";
+export const loggedInUserType = "Admin";
 
 function App() {
   const dispatch = useDispatch();
@@ -24,7 +25,11 @@ function App() {
   const loggedIn = true;
   const [routes, setRoutes] = useState([]);
   const [childRoute, setChildRoute] = useState([])
-
+  const ExtraRoutes = [{
+    url: `/settings/adminUser/profile`,
+    breadcrumbs: true,
+    element: <UserProfileDetails/>,
+  },]
   useEffect(() => {
     if (loggedIn) {
       if (loggedInUserType === "Admin") {
@@ -35,7 +40,7 @@ function App() {
           }
         })
         setChildRoute(childRoutes)
-        setRoutes([...Admin, ...AuthRoutes, ...childRoutes]);
+        setRoutes([...Admin, ...AuthRoutes, ...childRoutes, ...ExtraRoutes]);
       } else if (loggedInUserType === "Provider") {
         let childRoutes = []
         Provider.forEach((route)=>{
@@ -54,8 +59,10 @@ function App() {
     }
   }, [loggedInUserType, loggedIn]);
 
+
+
   const allAuthRouteUrls = [...AuthRoutes].map((route) => route?.url);
-  const allProtectedRouteUrls = [...Admin, ...Provider, ...User, ...childRoute].map(
+  const allProtectedRouteUrls = [...Admin, ...Provider, ...User, ...childRoute, ...ExtraRoutes].map(
     (route) => route?.url
   );
 
@@ -65,7 +72,6 @@ function App() {
   },[loggedIn, window.location.pathname])
 
   
-
   return (
     <Router>
       <Suspense fallback={<Loadable />}>
