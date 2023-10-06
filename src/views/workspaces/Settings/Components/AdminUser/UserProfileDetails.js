@@ -23,9 +23,9 @@ const avatarStyle = {
   position: "relative",
   height: 200,
   background:
-    'url("https://www.shutterstock.com/shutterstock/photos/1416955070/display_1500/stock-vector-abstract-medical-background-with-flat-icons-and-symbols-template-design-with-concept-and-idea-for-1416955070.jpg")',
+    'url("https://img.freepik.com/premium-vector/light-blue-vector-background-with-bubbles_6869-1244.jpg?size=626&ext=jpg")',
   backgroundSize: "cover",
-  backgroundColor: "rgba(246, 242, 242, 0.2)",
+  backgroundColor: "rgba(211, 200, 200, 0.5)",
 };
 
 const userProfileStyle = {

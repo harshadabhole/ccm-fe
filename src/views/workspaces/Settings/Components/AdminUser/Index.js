@@ -20,6 +20,8 @@ import {
 } from "@mui/material";
 import UserProfileDetails from "../AdminUser/UserProfileDetails";
 import { useNavigate } from "react-router";
+import DrawerComponent from "../../../../../ui-component/Drawer";
+import AddProvider from "./feature/add-provider-form";
 
 const data = [
   {
@@ -129,6 +131,10 @@ const MyDataTable = () => {
   const [searchText, setSearchText] = useState("");
   const [sortedColumn, setSortedColumn] = useState(null);
   const [sortDirection, setSortDirection] = useState("asc");
+  const [selectedRow, setSelectedRow] = useState(null);
+  const [open, setOpen] = useState(false);
+
+
 
   const handleSearch = (e) => {
     setSearchText(e.target.value);
@@ -184,6 +190,9 @@ const MyDataTable = () => {
       console.log(`Deleting row with ID ${row.id}`);
     };
 
+
+    
+
     return (
       <div>
         <IconButton onClick={handleClick}>
@@ -238,6 +247,14 @@ const MyDataTable = () => {
     );
   };
 
+  const handleOpen = () => {
+    setOpen(true);
+  };
+
+const handleClose = () => {
+    setOpen(false);
+  };
+
   return (
     <>
       <Grid container spacing={2} padding={3} sx={2}>
@@ -275,7 +292,7 @@ const MyDataTable = () => {
                     value={searchText}
                     onChange={handleSearch}
                   />
-                  <Button variant="contained">Add admin user</Button>
+                    <Button variant="contained" onClick={handleOpen}>Add Admin user</Button>
                 </Grid>
 
                 <Grid item xs={12}>
@@ -292,6 +309,7 @@ const MyDataTable = () => {
                     sortDirection={sortDirection}
                     pagination
                   />
+                  <DrawerComponent open={open} handleOpen={handleOpen} handleClose={handleClose} data={ AddProvider} />
                 </Grid>
               </Grid>
             </CardContent>
