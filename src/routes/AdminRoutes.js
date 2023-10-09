@@ -45,14 +45,14 @@ export const Admin = [
       }
     ]
   },
-  {
-    id: "devices",
-    title: "Devices",
-    type: "item", // Change type to 'group' for nested children
-    icon: <TaskOutlinedIcon />,
-    url: "/devices",
-    breadcrumbs: true,
-  },
+  // {
+  //   id: "devices",
+  //   title: "Devices",
+  //   type: "item", // Change type to 'group' for nested children
+  //   icon: <TaskOutlinedIcon />,
+  //   url: "/devices",
+  //   breadcrumbs: true,
+  // },
   {
     id: "settings",
     title: "Settings",
