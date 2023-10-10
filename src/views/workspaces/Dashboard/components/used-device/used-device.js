@@ -1,9 +1,10 @@
 import React from "react";
 import {  Typography, Divider, Grid, Paper } from "@mui/material";
+import cardStyle from "../../../../../theme/card-layout";
 
 function UsedDevice({item}) {
   return (
-    <Paper elevation={3}>
+    <Paper elevation={3} style={cardStyle}>
       <Grid
       container
       sx={{
@@ -11,7 +12,7 @@ function UsedDevice({item}) {
         alignItems: "center",
         justifyContent: 'space-around',
         padding: '2px',
-        marginTop: '10px'
+        marginTop: '15px'
       }}
       >
       <Grid item xs={12} sm={2}>
