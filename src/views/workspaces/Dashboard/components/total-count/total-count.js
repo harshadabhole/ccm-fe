@@ -1,9 +1,18 @@
-import React from 'react';
-import Chart from 'react-apexcharts';
-import { HelpOutline } from '@mui/icons-material';
-import { Card, CardHeader, Typography, Grid, Box, Paper, Input} from '@mui/material';
+import React from "react";
+import Chart from "react-apexcharts";
+import { HelpOutline } from "@mui/icons-material";
+import {
+  Card,
+  CardHeader,
+  Typography,
+  Grid,
+  Box,
+  Paper,
+  Input,
+  CardContent
+} from "@mui/material";
 
-const TotalCount = ({name}) => {
+const TotalCount = ({ item }) => {
   // const data = {
   //   completed: "786,617",
   //   inProgress: "13,561"
@@ -22,37 +31,37 @@ const TotalCount = ({name}) => {
         opacity: 0.1,
       },
     },
-    colors: ['#51e5a8'],
+    colors: ["#51e5a8"],
     plotOptions: {
       radialBar: {
         offsetY: 10,
         startAngle: -150,
         endAngle: 150,
         hollow: {
-          size: '60%',
+          size: "60%",
         },
         track: {
-          background: '#ebe9f1',
-          strokeWidth: '50%',
+          background: "#ebe9f1",
+          strokeWidth: "50%",
         },
         dataLabels: {
           name: {
             show: false,
           },
           value: {
-            color: '#5e5873',
-            fontFamily: 'Montserrat',
-            fontSize: '1rem',
-            fontWeight: '800',
+            color: "#5e5873",
+            fontFamily: "Montserrat",
+            fontSize: "1rem",
+            fontWeight: "800",
           },
         },
       },
     },
     fill: {
-      type: 'gradient',
+      type: "gradient",
       gradient: {
-        shade: 'dark',
-        type: 'horizontal',
+        shade: "dark",
+        type: "horizontal",
         shadeIntensity: 0.5,
         gradientToColors: [""],
         inverseColors: true,
@@ -62,7 +71,7 @@ const TotalCount = ({name}) => {
       },
     },
     stroke: {
-      lineCap: 'round',
+      lineCap: "round",
     },
     grid: {
       padding: {
@@ -75,14 +84,26 @@ const TotalCount = ({name}) => {
 
   return (
     <Box textAlign="center">
-      <Paper elevation={3} >
-        <Typography >{name}</Typography>
-      <Grid container justifyContent="center">
-        <Grid item xs={12}>
-          <Chart options={options} series={series} type="radialBar" height={150} />
+      <Card
+        elevation={3}
+        padding={3}
+        sx={{
+          boxShadow: "0px 0px 8px #00000029",
+          borderRadius: "5px",
+          opacity: 1,
+          height: 196
+        }}
+      >
+        <CardContent>
+        <Typography>{item.text}</Typography>
+        <Grid container justifyContent="center">
+          <Grid item xs={12}>
+            {/* <Chart options={options} series={series} type="radialBar" height={150} /> */}
+            <Typography variant="h5">{item.value}</Typography>
+          </Grid>
         </Grid>
-      </Grid>
-      </Paper>
+        </CardContent>
+      </Card>
     </Box>
   );
 };

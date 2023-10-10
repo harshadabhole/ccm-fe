@@ -27,6 +27,7 @@
     "react-apexcharts": "^1.4.1",
     "react-chartjs-2": "^5.2.0",
     "react-data-table-component": "^7.5.4",
+    "react-date-picker": "^10.5.1",
     "react-dom": "^18.2.0",
     "react-drag-drop-files": "^2.3.10",
     "react-dropzone": "^14.2.3",
