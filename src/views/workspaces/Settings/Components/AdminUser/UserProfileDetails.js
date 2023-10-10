@@ -13,7 +13,7 @@ import {
 import userImage from "../../../../../assets/avatar-s-11.jpg";
 import { Formik, Field, Form } from "formik";
 import PhotoCameraIcon from "@mui/icons-material/PhotoCamera";
-import { useLocation } from "react-router";
+import { useLocation, useNavigate } from "react-router";
 
 const containerStyle = {
   position: "relative",
@@ -70,8 +70,8 @@ const fields = [
 
 function UserProfileDetails() {
   const location = useLocation();
+  const navigate = useNavigate();
   const editMode = location.state?.edit;
-  // const [editMode, setEditMode] = useState(edit);
   const [selectedImage, setSelectedImage] = useState(userImage);
   const initialValues = {
     specialty: "Orthologist",
@@ -86,11 +86,9 @@ function UserProfileDetails() {
   };
 
   const handleCancelClick = () => {
-    // setEditMode(false);
   };
 
   const handleSaveClick = (values) => {
-    // setEditMode(false);
     console.log("Saved values:", values);
   };
 
@@ -139,24 +137,29 @@ function UserProfileDetails() {
                         Profile
                       </Typography>
 
-                      {editMode && (
+                      {
                         <span>
                           <Button
                             variant="outlined"
-                            onClick={handleCancelClick}
+                            onClick={() =>
+                              navigate("/settings", {
+                                state: { index: 2 },
+                              })
+                            }
                             sx={{ marginRight: "10px" }}
                           >
                             Cancel
                           </Button>
+                          {editMode && 
                           <Button
                             type="submit"
                             variant="contained"
                             onClick={() => handleSaveClick(values)}
                           >
                             Save
-                          </Button>
+                          </Button>}
                         </span>
-                      )}
+                      }
                     </>
                   </Grid>
                   <Grid item xs={12} padding={1}>
@@ -215,7 +218,6 @@ function UserProfileDetails() {
                                   <span
                                     style={{
                                       fontWeight: "bold",
-                                      // marginRight: "10px",
                                     }}
                                   >
                                     {field.label}

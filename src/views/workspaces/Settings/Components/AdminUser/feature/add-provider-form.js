@@ -31,7 +31,7 @@ const MainContainer = styled(Grid)({
   marginTop: "20px",
 });
 
-function AddProvider() {
+function AddProvider({handleClose}) {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const [file, setFile] = useState(null);
@@ -149,7 +149,7 @@ function AddProvider() {
                     fontWeight: 700,
                     width: "100px",
                   }}
-                  // onClick={handleSubmit}
+                  onClick={handleClose}
                 >
                   Cancel
                 </Button>

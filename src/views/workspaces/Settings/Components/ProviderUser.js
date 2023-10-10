@@ -4,24 +4,9 @@ import { ChevronDown } from "react-feather";
 import IconButton from "@mui/material/IconButton";
 import Popover from "@mui/material/Popover";
 import MoreIcon from "@mui/icons-material/MoreVert";
-import CancelOutlinedIcon from "@mui/icons-material/CancelOutlined";
 import Switch from "@mui/material/Switch";
-import EditIcon from "@mui/icons-material/Edit";
-import DeleteIcon from "@mui/icons-material/Delete";
-import {
-  TextField,
-  Grid,
-  Button,
-  Card,
-  CardContent,
-  Typography,
-  Menu,
-  MenuItem,
-} from "@mui/material";
-import UserProfileDetails from "../AdminUser/UserProfileDetails";
+import { Grid, Menu, MenuItem } from "@mui/material";
 import { useNavigate } from "react-router";
-import DrawerComponent from "../../../../../ui-component/Drawer";
-import AddProvider from "./feature/add-provider-form";
 
 const data = [
   {
@@ -126,19 +111,11 @@ const MyDataTable = () => {
   ];
 
   const [showProfile, setShowProfile] = useState(false);
-  const [edit, setEdit] = useState(false);
 
   const [searchText, setSearchText] = useState("");
   const [sortedColumn, setSortedColumn] = useState(null);
   const [sortDirection, setSortDirection] = useState("asc");
-  const [selectedRow, setSelectedRow] = useState(null);
   const [open, setOpen] = useState(false);
-
-
-
-  const handleSearch = (e) => {
-    setSearchText(e.target.value);
-  };
 
   const filteredData = data.filter(
     (item) =>
@@ -170,28 +147,16 @@ const MyDataTable = () => {
     const open = Boolean(anchorEl);
 
     const handleEdit = () => {
-      //   handleClose();
-        setShowProfile(true);
-      //   setEdit(true);
       navigate("/settings/adminUser/profile", { state: { edit: true } });
-      console.log(`Editing row with ID ${row.id}`);
     };
 
     const handleProfileView = () => {
-      //   handleClose();
-        setShowProfile(true);
-      //   setEdit(false);
-      //   window.location.href="/settings/adminUser/profile"
       navigate("/settings/adminUser/profile", { state: { edit: false } });
     };
 
     const handleDelete = () => {
       handleClose();
-      console.log(`Deleting row with ID ${row.id}`);
     };
-
-
-    
 
     return (
       <div>
@@ -211,11 +176,7 @@ const MyDataTable = () => {
             horizontal: "right",
           }}
         >
-          <Menu
-            anchorEl={anchorEl}
-            open={Boolean(anchorEl)}
-            //   onClose={handleCloseMenu}
-          >
+          <Menu anchorEl={anchorEl} open={Boolean(anchorEl)} onClose={handleClose}>
             <MenuItem onClick={handleProfileView}>Profile</MenuItem>
             <MenuItem onClick={handleEdit}>Edit</MenuItem>
             <MenuItem onClick={handleDelete}>Delete</MenuItem>
@@ -230,9 +191,7 @@ const MyDataTable = () => {
 
     const handleChange = () => {
       setChecked(!checked);
-      // You can handle the status change here and update your data accordingly
-      const newStatus = checked ? "Off" : "On";
-      console.log(`Status changed to ${newStatus}`);
+      // const newStatus = checked ? "Off" : "On";
     };
 
     return (
@@ -247,82 +206,37 @@ const MyDataTable = () => {
     );
   };
 
-  const handleOpen = () => {
-    setOpen(true);
-  };
-
-const handleClose = () => {
-    setOpen(false);
-  };
-
   return (
     <>
       <Grid container spacing={2} padding={3} sx={2}>
         <Grid item xs={12}>
-          <Card sx={{ boxShadow: 3 }}>
-            <CardContent sx={{ alignItems: "center" }}>
-              <Grid container spacing={2}>
-                <Grid
-                  item
-                  xs={6}
-                  sx={{ display: "flex", justifyContent: "start" }}
-                >
-                  <Typography
-                    variant="h6"
-                    component="div"
-                    sx={{
-                      fontSize: "20px",
-                      display: "flex",
-                    }}
-                  >
-                    Settings
-                  </Typography>
-                </Grid>
-                <Grid
-                  item
-                  xs={6}
-                  padding={0}
-                  sx={{ display: "flex", justifyContent: "end" }}
-                >
-                  <TextField
-                    variant="outlined"
-                    placeholder="Type to search here"
-                    size="small"
-                    sx={{ marginRight: "30px" }}
-                    value={searchText}
-                    onChange={handleSearch}
-                  />
-                    <Button variant="contained" onClick={handleOpen}>Add Admin user</Button>
-                </Grid>
-
-                <Grid item xs={12}>
-                  <DataTable
-                    title="Admin user"
-                    columns={columns}
-                    data={filteredData}
-                    onRowClicked={()=> navigate("/settings/adminUser/profile", { state: { edit: false } })}
-                    sortIcon={<ChevronDown />}
-                    // sortFunction={customSortFunction}
-                    sortServer // Set this to true if you're using server-side sorting
-                    onSort={handleSort}
-                    sortColumn={sortedColumn}
-                    sortDirection={sortDirection}
-                    pagination
-                  />
-                  <DrawerComponent open={open} handleOpen={handleOpen} handleClose={handleClose} data={ AddProvider} />
-                </Grid>
-              </Grid>
-            </CardContent>
-          </Card>
+          <Grid container spacing={2}>
+            <Grid item xs={12}>
+              <DataTable
+                columns={columns}
+                data={filteredData}
+                onRowClicked={() =>
+                  navigate("/settings/adminUser/profile", {
+                    state: { edit: false },
+                  })
+                }
+                sortIcon={<ChevronDown />}
+                sortServer
+                onSort={handleSort}
+                sortColumn={sortedColumn}
+                sortDirection={sortDirection}
+                pagination
+              />
+            </Grid>
+          </Grid>
         </Grid>
       </Grid>
     </>
   );
 };
 
-function AdminUser(props) {
-  console.log("props", props);
+function ProviderUser() {
   return <MyDataTable />;
 }
 
-export default AdminUser;
+export default ProviderUser;
