@@ -85,8 +85,7 @@ function UserProfileDetails() {
     bio: "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.",
   };
 
-  const handleCancelClick = () => {
-  };
+  const handleCancelClick = () => {};
 
   const handleSaveClick = (values) => {
     console.log("Saved values:", values);
@@ -146,18 +145,29 @@ function UserProfileDetails() {
                                 state: { index: 2 },
                               })
                             }
+                            style={{
+                              marginRight: "15px",
+                              textTransform: "none",
+                              width: "163px",
+                            }}
                             sx={{ marginRight: "10px" }}
                           >
                             Cancel
                           </Button>
-                          {editMode && 
-                          <Button
-                            type="submit"
-                            variant="contained"
-                            onClick={() => handleSaveClick(values)}
-                          >
-                            Save
-                          </Button>}
+                          {editMode && (
+                            <Button
+                              type="submit"
+                              variant="contained"
+                              style={{
+                                marginRight: "15px",
+                                textTransform: "none",
+                                width: "163px",
+                              }}
+                              onClick={() => handleSaveClick(values)}
+                            >
+                              Save
+                            </Button>
+                          )}
                         </span>
                       }
                     </>
@@ -201,117 +211,102 @@ function UserProfileDetails() {
                       </Box>
                     </Box>
                     <Grid container xs={12} spacing={2}>
-                      <Grid item xs={12} sm={6}>
+                      <Grid item xs={12} md={12} lg={6} sm={12}>
                         {leftFields.map((field) => (
                           <React.Fragment key={field.key}>
-                            <Typography
-                              variant="h6"
-                              component="div"
-                              sx={{
-                                marginBottom: "10px",
-                                fontSize: "18px",
-                                display: "flex",
-                              }}
-                            >
-                              <Grid container xs={12} spacing={2}>
-                                <Grid item xs={4}>
-                                  <span
-                                    style={{
-                                      fontWeight: "bold",
-                                    }}
-                                  >
-                                    {field.label}
-                                  </span>
-                                </Grid>
-                                <Grid item xs={8}>
-                                  {!editMode && (
-                                    <>
-                                      <span
-                                        style={{
-                                          fontWeight: "bold",
-                                          marginRight: "5px",
-                                        }}
-                                      >
-                                        :{" "}
-                                      </span>
-                                      <span style={{ fontWeight: "400" }}>
-                                        {values[field.key]}
-                                      </span>
-                                    </>
-                                  )}
-                                </Grid>
+                            <Grid container xs={12} spacing={2}>
+                              <Grid item xs={6} md={4} lg={4} sm={5}>
+                                <Typography
+                                  variant="subtitle1"
+                                  component="div"
+                                  sx={{
+                                    marginBottom: "5px",
+                                    fontWeight: "500",
+                                  }}
+                                >
+                                  {field.label}
+                                </Typography>
                               </Grid>
-                            </Typography>
+                              <Grid item xs={6} md={8} lg={8} sm={7}>
+                                {!editMode && (
+                                  <>
+                                    <Typography
+                                      variant="body1"
+                                      component="div"
+                                      sx={{ marginBottom: "5px", }}
+                                    >
+                                      :&nbsp;&nbsp;&nbsp;
+                                      {values[field.key]}
+                                    </Typography>
+                                  </>
+                                )}
+                              </Grid>
+                            </Grid>
+
                             {editMode && (
-                              <Field
-                                as={TextField}
-                                fullWidth
-                                multiline={field.multiline || false}
-                                name={field.key}
-                                sx={{
-                                  marginBottom: "10px",
-                                  boxShadow: 3,
-                                  width: "90%",
-                                }}
-                              />
+                              <Grid container xs={12} >
+                                <Field
+                                  as={TextField}
+                                  fullWidth
+                                  multiline={field.multiline || false}
+                                  name={field.key}
+                                  sx={{
+                                    marginBottom: "10px",
+                                    boxShadow: 3,
+                                    width: "90%",
+                                  }}
+                                />
+                              </Grid>
                             )}
                           </React.Fragment>
                         ))}
                       </Grid>
-                      <Grid item xs={12} sm={6}>
+                      <Grid item xs={12} md={12} lg={6} sm={12}>
                         {rightFields.map((field) => (
                           <React.Fragment key={field.key}>
-                            <Typography
-                              variant="h6"
-                              component="div"
-                              sx={{
-                                marginBottom: "10px",
-                                fontSize: "18px",
-                                display: "flex",
-                              }}
-                            >
+                          
                               <Grid container xs={12} spacing={2}>
-                                <Grid item xs={4}>
-                                  <span
-                                    style={{
-                                      fontWeight: "bold",
-                                      // marginRight: "10px",
+                                <Grid item xs={12} md={4} lg={4} sm={5}>
+                                  <Typography
+                                    variant="subtitle1"
+                                    component="div"
+                                    sx={{
+                                      marginBottom: "5px",
+                                      fontWeight: "500",
                                     }}
                                   >
                                     {field.label}
-                                  </span>
+                                  </Typography>
                                 </Grid>
-                                <Grid item xs={8}>
+                                <Grid item xs={12} md={8} lg={8} sm={7}>
                                   {!editMode && (
                                     <>
-                                      <span
-                                        style={{
-                                          fontWeight: "bold",
-                                          marginRight: "5px",
-                                        }}
+                                      <Typography
+                                        variant="body1"
+                                        component="div"
+                                        sx={{ marginBottom: "5px" }}
                                       >
-                                        :{" "}
-                                      </span>
-                                      <span style={{ fontWeight: "400" }}>
+                                        :&nbsp;&nbsp;&nbsp;
                                         {values[field.key]}
-                                      </span>
+                                      </Typography>
                                     </>
                                   )}
                                 </Grid>
                               </Grid>
-                            </Typography>
                             {editMode && (
-                              <Field
-                                as={TextField}
-                                fullWidth
-                                multiline={field.multiline || false}
-                                name={field.key}
-                                sx={{
-                                  marginBottom: "10px",
-                                  boxShadow: 3,
-                                  width: "90%",
-                                }}
-                              />
+                              <Grid container xs={12} >
+                                <Field
+                                  as={TextField}
+                                  fullWidth
+                                  multiline={field.multiline || false}
+                                  name={field.key}
+                                  sx={{
+                                    marginBottom: "10px",
+                                    boxShadow: 3,
+                                    width: "90%",
+                                  }}
+                                />
+                              </Grid>
                             )}
                           </React.Fragment>
                         ))}

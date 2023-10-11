@@ -31,7 +31,7 @@ const MainContainer = styled(Grid)({
   marginTop: "20px",
 });
 
-function AddProvider({handleClose}) {
+function AddProvider({ handleClose }) {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const [file, setFile] = useState(null);
@@ -120,25 +120,9 @@ function AddProvider({handleClose}) {
         {({ handleSubmit }) => (
           <Form>
             <Grid container>
-              <Grid item xs={6}>
-                <Typography
-                  // variant="h6"
-                  sx={{
-                    fontSize: "20px",
-                    lineHeight: "32px",
-                    letterSpacing: "0em",
-                    textTransform: "none",
-                    fontWeight: 600,
-                    marginBottom: "15px",
-                    // color: "#0477C5",
-                  }}
-                >
-                  Add Provider Group
-                </Typography>
-              </Grid>
               <Grid
                 item
-                xs={6}
+                xs={12}
                 sx={{ display: "flex", justifyContent: "end", marginBottom: 2 }}
               >
                 <Button
@@ -147,7 +131,8 @@ function AddProvider({handleClose}) {
                   style={{
                     height: "40px",
                     fontWeight: 700,
-                    width: "100px",
+                    textTransform: "none",
+                    width: "163px",
                   }}
                   onClick={handleClose}
                 >
@@ -159,64 +144,41 @@ function AddProvider({handleClose}) {
                     height: "40px",
                     fontWeight: 700,
                     marginLeft: "20px",
-                    width: "100px",
+                    textTransform: "none",
+                    width: "163px",
                   }}
                   onClick={handleSubmit}
                 >
                   Save
                 </Button>
               </Grid>
-              <Grid item xs={6}>
-                <Typography
-                  // variant="h6"
-                  sx={{
-                    fontSize: "18px",
-                    lineHeight: "32px",
-                    letterSpacing: "0em",
-                    textTransform: "none",
-                    fontWeight: 600,
-                    // marginBottom: "15px",
-                    // color: "#0477C5",
-                  }}
-                >
-                  Demographics
-                </Typography>
-              </Grid>
               <Grid
                 item
                 xs={6}
                 sx={{
-                  display: "flex",
-                  alignItems: "center",
-                  justifyContent: "space-between",
+                  marginBottom: "15px",
+                  // marginTop:"20px"
                 }}
               >
                 <Typography
+                  variant="h6"
                   sx={{
-                    fontSize: "18px",
-                    lineHeight: "32px",
-                    letterSpacing: "0em",
-                    textTransform: "none",
-                    fontWeight: 600,
-                    marginLeft: "7px",
+                    marginBottom: "15px",
+                    // marginTop:"20px"
                   }}
                 >
-                  Billing Address
+                  Add New Provider
                 </Typography>
-                <Field name="gender">
-                  {({ field }) => (
-                    <FormControlLabel
-                      value="same as primary address"
-                      control={<Radio {...field} />}
-                      label="Same as primary address"
-                      labelPlacement="end" // Place the label after the radio button
-                    />
-                  )}
-                </Field>
               </Grid>
+
               <Grid container spacing={3}>
-                <Grid item xs={6}>
-                  <Typography variant="subtitle1">
+                <Grid item xs={12} lg={6}>
+                  <Typography
+                    variant="subtitle1"
+                    sx={{
+                      fontWeight: "500",
+                    }}
+                  >
                     Provider Group Name
                   </Typography>
                   <Paper elevation={5}>
@@ -234,8 +196,15 @@ function AddProvider({handleClose}) {
                     style={{ color: "red" }}
                   />
                 </Grid>
-                <Grid item xs={6}>
-                  <Typography variant="subtitle1">Address Line 1</Typography>
+                <Grid item xs={12} lg={6}>
+                  <Typography
+                    variant="subtitle1"
+                    sx={{
+                      fontWeight: "500",
+                    }}
+                  >
+                    Address Line 1
+                  </Typography>
                   <Paper elevation={3}>
                     <Field
                       as={TextField}
@@ -251,8 +220,15 @@ function AddProvider({handleClose}) {
                     style={{ color: "red" }}
                   />
                 </Grid>
-                <Grid item xs={6}>
-                  <Typography variant="subtitle1">Email Id</Typography>
+                <Grid item xs={12} lg={6}>
+                  <Typography
+                    variant="subtitle1"
+                    sx={{
+                      fontWeight: "500",
+                    }}
+                  >
+                    Email Id
+                  </Typography>
                   <Paper elevation={3}>
                     <Field
                       as={TextField}
@@ -268,8 +244,15 @@ function AddProvider({handleClose}) {
                     style={{ color: "red" }}
                   />
                 </Grid>
-                <Grid item xs={6}>
-                  <Typography variant="subtitle1">Address Line 2</Typography>
+                <Grid item xs={12} lg={6}>
+                  <Typography
+                    variant="subtitle1"
+                    sx={{
+                      fontWeight: "500",
+                    }}
+                  >
+                    Address Line 2
+                  </Typography>
                   <Paper elevation={3}>
                     <Field
                       as={TextField}
@@ -285,8 +268,15 @@ function AddProvider({handleClose}) {
                     style={{ color: "red" }}
                   />
                 </Grid>
-                <Grid item xs={6}>
-                  <Typography variant="subtitle1">Phone Number</Typography>
+                <Grid item xs={12} lg={6}>
+                  <Typography
+                    variant="subtitle1"
+                    sx={{
+                      fontWeight: "500",
+                    }}
+                  >
+                    Phone Number
+                  </Typography>
                   <Paper elevation={3}>
                     <Field
                       as={TextField}
@@ -302,8 +292,15 @@ function AddProvider({handleClose}) {
                     style={{ color: "red" }}
                   />
                 </Grid>
-                <Grid item xs={6}>
-                  <Typography variant="subtitle1">Country</Typography>
+                <Grid item xs={12} lg={6}>
+                  <Typography
+                    variant="subtitle1"
+                    sx={{
+                      fontWeight: "500",
+                    }}
+                  >
+                    Country
+                  </Typography>
                   <Paper elevation={3}>
                     <Field
                       as={TextField}
@@ -319,8 +316,15 @@ function AddProvider({handleClose}) {
                     style={{ color: "red" }}
                   />
                 </Grid>
-                <Grid item xs={6}>
-                  <Typography variant="subtitle1">Speciality</Typography>
+                <Grid item xs={12} lg={6}>
+                  <Typography
+                    variant="subtitle1"
+                    sx={{
+                      fontWeight: "500",
+                    }}
+                  >
+                    Speciality
+                  </Typography>
                   <Paper elevation={3}>
                     <Field
                       as={TextField}
@@ -336,8 +340,15 @@ function AddProvider({handleClose}) {
                     style={{ color: "red" }}
                   />
                 </Grid>
-                <Grid item xs={6}>
-                  <Typography variant="subtitle1">State</Typography>
+                <Grid item xs={12} lg={6}>
+                  <Typography
+                    variant="subtitle1"
+                    sx={{
+                      fontWeight: "500",
+                    }}
+                  >
+                    State
+                  </Typography>
                   <Paper elevation={3}>
                     <Field
                       as={TextField}
@@ -353,8 +364,15 @@ function AddProvider({handleClose}) {
                     style={{ color: "red" }}
                   />
                 </Grid>
-                <Grid item xs={6}>
-                  <Typography variant="subtitle1">Website</Typography>
+                <Grid item xs={12} lg={6}>
+                  <Typography
+                    variant="subtitle1"
+                    sx={{
+                      fontWeight: "500",
+                    }}
+                  >
+                    Website
+                  </Typography>
                   <Paper elevation={3}>
                     <Field
                       as={TextField}
@@ -370,8 +388,15 @@ function AddProvider({handleClose}) {
                     style={{ color: "red" }}
                   />
                 </Grid>
-                <Grid item xs={6}>
-                  <Typography variant="subtitle1">ZipCode</Typography>
+                <Grid item xs={12} lg={6}>
+                  <Typography
+                    variant="subtitle1"
+                    sx={{
+                      fontWeight: "500",
+                    }}
+                  >
+                    ZipCode
+                  </Typography>
                   <Paper elevation={3}>
                     <Field
                       as={TextField}
@@ -392,40 +417,8 @@ function AddProvider({handleClose}) {
                   spacing={3}
                   sx={{ paddingTop: "24px", paddingLeft: "24px", spacing: 3 }}
                 >
-                  <Grid item xs={6}>
-                    <Typography
-                      // variant="h6"
-                      sx={{
-                        fontSize: "20px",
-                        lineHeight: "32px",
-                        letterSpacing: "0em",
-                        textTransform: "none",
-                        fontWeight: 600,
-                        marginBottom: "15px",
-                        // color: "#0477C5",
-                      }}
-                    >
-                      Physical Address
-                    </Typography>
-                    <Grid item >
-                      <Typography variant="subtitle1">ZipCode</Typography>
-                      <Paper elevation={3}>
-                        <Field
-                          as={TextField}
-                          variant="outlined"
-                          fullWidth
-                          placeholder="ZipCode"
-                          name="zipCode"
-                        />
-                      </Paper>
-                      <ErrorMessage
-                        name="zipCode"
-                        component="div"
-                        style={{ color: "red" }}
-                      />
-                    </Grid>
-                  </Grid>
-                  <Grid item xs={6}>
+                    
+                  <Grid item xs={12}>
                     <FileUploader
                       multiple={true}
                       handleChange={handleChange}

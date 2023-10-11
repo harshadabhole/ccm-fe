@@ -13,6 +13,7 @@ import DrawerComponent from "../../../ui-component/Drawer";
 import ChangeMyPassword from "./Components/ChangePassword";
 import AddProvider from "./Components/AdminUser/feature/add-provider-form";
 import { useSelector } from "react-redux";
+import AuditEvent from "./Components/AuditEvent";
 
 const SettingsContext = createContext();
 
@@ -31,7 +32,7 @@ function Settings() {
     1: <NotificationSettings />,
     2: <ProviderUser />,
     3: <AuditLog />,
-    4: <p className="text-center m-5">Not implemented</p>,
+    4: <AuditEvent />,
     5: <p className="text-center m-5 ">Not implemented</p>,
     6: <p className="text-center m-5 ">Not implemented</p>,
     7: <p className="text-center m-5 ">Not implemented</p>,
@@ -76,20 +77,21 @@ function Settings() {
             <Button
               variant="outlined"
               color="primary"
-              style={{ marginRight: "15px" }}
+              style={{ marginRight: "15px", textTransform: 'none', width:"263px" }}
               onClick={() => {
                 setOpen(true);
               }}
             >
-              Change password
+              Change Password
             </Button>
             <Button
               variant="contained"
               color="primary"
-              style={{ marginRight: "8px" }}
+              className=""
+              style={{ marginRight: "8px", textTransform: 'none', width:"263px" }}
               onClick={() => setEdit(!edit)}
             >
-              Edit profile
+              Edit Profile
             </Button>
           </>
         )}
@@ -98,7 +100,7 @@ function Settings() {
             <Button
               variant="outlined"
               color="error"
-              style={{ marginRight: "15px" }}
+              style={{ marginRight: "15px", textTransform: 'none', width:"263px"  }}
               onClick={() => {
                 setEdit(!edit);
                 // alert("Reset data ");
@@ -109,7 +111,7 @@ function Settings() {
             <Button
               variant="contained"
               color="primary"
-              style={{ marginRight: "8px" }}
+              style={{ marginRight: "8px", textTransform: 'none', width:"263px"  }}
               onClick={() => {
                 alert("Successfully saved");
                 // setEdit(!edit)
@@ -134,7 +136,7 @@ function Settings() {
         <Button
           variant="contained"
           color="primary"
-          style={{ marginRight: "8px" }}
+          style={{ marginRight: "8px", textTransform: 'none', width:"263px"  }}
           // onClick={handleSubmit}
         >
           Set Default
@@ -155,7 +157,7 @@ function Settings() {
           <Button
             variant="contained"
             color="primary"
-            style={{ marginRight: "8px" }}
+            style={{ marginRight: "8px", textTransform: 'none', width:"263px"  }}
             onClick={() => setAddProvider(true)}
           >
             Add provider user
@@ -190,7 +192,7 @@ function Settings() {
             sx={{ flex: 1, alignItems: "center", marginBottom: "10px" }}
           >
             <Grid item xs={6}>
-              <Typography variant="h6" sx={{ fontSize: "22px" }}>
+              <Typography variant="h6">
                 Settings
               </Typography>
             </Grid>
@@ -203,7 +205,9 @@ function Settings() {
             </Grid>
           </Grid>
 
-          <Box sx={{ marginBottom: 3 }}>
+
+
+          <Box  sx={{ marginBottom: 3 }}>
             <NavTabs
               a11TabsProps={a11TabsProps}
               value={value}

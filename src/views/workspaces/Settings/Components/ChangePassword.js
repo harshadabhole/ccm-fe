@@ -7,6 +7,42 @@ import * as Yup from "yup";
 import { List, ListItem } from "@mui/material";
 import FieldWithVisibilityToggle from "./FieldWithVisibilityToggle";
 
+const validRequirementStyle = {
+  color: "green", // Change to your desired color for valid requirements
+};
+
+const invalidRequirementStyle = {
+  color: "red", // Change to your desired color for invalid requirements
+};
+
+const isRequirementMet = (requirementName, yourPassword) => {
+  // Create a regular expression for each condition
+  const regexPatterns = {
+    minLength: /^.{8,}$/, // Minimum 8 characters long
+    hasLowerCase: /[a-z]/, // At least one lowercase character
+    hasUpperCase: /[A-Z]/, // At least one uppercase character
+    hasNumber: /[0-9]/, // At least one number
+    hasSymbol: /[@#$%^&+=]/, // At least one symbol
+  };
+
+  // Check the specified requirement
+  switch (requirementName) {
+    case "Minimum 8 characters long - the more, the better":
+      return regexPatterns.minLength.test(yourPassword); // Replace yourPassword with the actual password to test
+    case "At list one LowerCase character":
+      return regexPatterns.hasLowerCase.test(yourPassword); // Replace yourPassword with the actual password to test
+    case "At list one UpperCase character":
+      return regexPatterns.hasUpperCase.test(yourPassword); // Replace yourPassword with the actual password to test
+    case "At list one Number":
+      return regexPatterns.hasNumber.test(yourPassword); // Replace yourPassword with the actual password to test
+    case "At list one symbol":
+      return regexPatterns.hasSymbol.test(yourPassword); // Replace "yourPassword" with the actual password to test
+    default:
+      // Handle other requirements or throw an error for unknown requirements
+      throw new Error(`Unknown requirement: ${requirementName}`);
+  }
+};
+
 const validationSchema = Yup.object().shape({
   currentPassword: Yup.string().required("Current Password is required"),
   newPassword: Yup.string()
@@ -29,6 +65,7 @@ const validationSchema = Yup.object().shape({
 
 function ChangeMyPassword(props) {
   console.log("props", props);
+  const [NewPasswordValues, setNewPasswordValues] = useState()
   const [showPasswordFields, setShowPasswordFields] = useState({
     currentPassword: false,
     newPassword: false,
@@ -102,7 +139,11 @@ function ChangeMyPassword(props) {
                 <Button
                   variant="outlined"
                   color="error"
-                  style={{ marginRight: "8px" }}
+                  style={{
+                    marginRight: "8px",
+                    textTransform: "none",
+                    width: "263px",
+                  }}
                   onClick={() => props.handleClose()}
                 >
                   Cancel
@@ -110,7 +151,11 @@ function ChangeMyPassword(props) {
                 <Button
                   variant="contained"
                   color="primary"
-                  style={{ marginRight: "8px" }}
+                  style={{
+                    marginRight: "8px",
+                    textTransform: "none",
+                    width: "263px",
+                  }}
                   onClick={handleSubmit}
                 >
                   Save
@@ -124,28 +169,16 @@ function ChangeMyPassword(props) {
                   variant="h6"
                   component="div"
                   xs={12}
-                  sx={{ fontSize: "22px", marginBottom: "5px" }}
+                  sx={{ marginBottom: "5px" }}
                 >
                   Change Password
                 </Typography>
               </Grid>
-              <Grid
-                item
-                xs={12}
-                overflow="hidden"
-                sx={{ marginBottom: "30px" }}
-              >
-                <Typography
-                  variant="p"
-                  sx={{ fontWeight: "light", fontSize: "18px" }}
-                >
-                  Do you want to change your password?
-                </Typography>
-              </Grid>
-              <Grid container spacing={2}>
-                <Grid item xs={6}>
+
+              <Grid container spacing={2} xs={12}>
+                <Grid item xs={12} md={10} lg={8} sm={12}>
                   <Form>
-                    <Grid item xs={12} marginBottom={1}>
+                    <Grid item xs={12} md={10} lg={8} sm={12} marginBottom={1}>
                       {PasswordData.map((field) => (
                         <FieldWithVisibilityToggle
                           key={field.name}
@@ -161,22 +194,22 @@ function ChangeMyPassword(props) {
                   </Form>
                 </Grid>
 
-                <Grid container xs={12}>
+                <Grid container xs={12} sx={3} padding={2}>
                   <Typography
-                    variant="h6"
+                    variant="subtitle1"
                     sx={{
-                      fontSize: "22px",
+                      fontSize: "18px",
                       marginBottom: "10px",
+                      fontWeight: "500",
                     }}
                   >
                     Password Requirements :
                   </Typography>
                   <Grid item xs={12}>
                     <Typography
-                      variant="h6"
+                      variant="body1"
                       sx={{
                         fontWeight: "400",
-                        fontSize: "20px",
                       }}
                     >
                       Ensure that this requirement are met:
@@ -185,16 +218,23 @@ function ChangeMyPassword(props) {
 
                   <List>
                     {PasswordRequirements.map((field) => {
+                      const isMet = isRequirementMet(
+                        field.lable,
+                        // values.newPassword
+                      ); // Pass the new password to isRequirementMet
                       return (
-                        <ListItem
-                          key={field.lable}
-                          sx={{
-                            fontWeight: "400",
-                            fontSize: "18px",
-                            marginBottom: "3px",
-                          }}
-                        >
-                          {field.lable}
+                        <ListItem key={field.lable}>
+                          <Typography
+                            variant="body1"
+                            sx={{
+                              fontSize: "18px",
+                              ...(isMet
+                                ? validRequirementStyle
+                                : invalidRequirementStyle),
+                            }}
+                          >
+                            {field.lable}
+                          </Typography>
                         </ListItem>
                       );
                     })}

@@ -165,8 +165,8 @@ const MyDataTable = () => {
   );
 };
 
-function AuditLog() {
+function AuditEvent() {
   return <MyDataTable />;
 }
 
-export default AuditLog;
+export default AuditEvent

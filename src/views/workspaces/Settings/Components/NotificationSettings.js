@@ -1,20 +1,12 @@
 import { Grid, Typography, Checkbox } from "@mui/material";
-import React from "react";
+import React, { useState } from "react";
 import DataTable from "react-data-table-component";
+import { customNotificationTableStyle } from "../../../../ccm-constant";
 
 function NotificationSettings() {
-
-  const customStyles = {
-    rows: {
-      style: {
-        borderBottom: "none",
-      },
-    },
-  };
-
   const initialNotificationSettings = [
     {
-      id: 1,
+      id: 0,
       notification_type: "Alerts",
       settings: [
         {
@@ -39,7 +31,7 @@ function NotificationSettings() {
       sortable: false,
     },
     {
-      id: 2,
+      id: 1,
       notification_type: "Billing",
       settings: [
         {
@@ -58,7 +50,7 @@ function NotificationSettings() {
       sortable: false,
     },
     {
-      id: 3,
+      id: 2,
       notification_type: "Task",
       settings: [
         {
@@ -96,6 +88,9 @@ function NotificationSettings() {
       sortable: false,
     },
   ];
+  const [checkboxValues, setCheckboxValues] = useState(
+    initialNotificationSettings
+  );
 
   const columns = [
     {
@@ -110,12 +105,21 @@ function NotificationSettings() {
       cell: (row) =>
         row.settings.map((setting, index) => (
           <div key={index}>
-            <Typography variant="body2">{setting.type}</Typography>
+            <Typography
+              variant="body1"
+              sx={{
+                font: "normal normal medium 14px Gilroy",
+                letterSpacing: "0px",
+                color: "#4C4C4CB2",
+                opacity: 1,
+              }}
+            >
+              {setting.type}
+            </Typography>
           </div>
         )),
       sortable: false,
       style: {
-        // Add custom style to remove dividers
         borderBottom: "0px",
       },
     },
@@ -125,12 +129,14 @@ function NotificationSettings() {
       cell: (row) =>
         row.settings.map((setting, index) => (
           <div key={index}>
-            <Checkbox checked={setting.text} />
+            <Checkbox
+              checked={setting.text}
+              onClick={() => handleCheckboxClick(row.id, "text")}
+            />
           </div>
         )),
       sortable: false,
       style: {
-        // Add custom style to remove dividers
         borderRight: "none",
       },
     },
@@ -140,12 +146,14 @@ function NotificationSettings() {
       cell: (row) =>
         row.settings.map((setting, index) => (
           <div key={index}>
-            <Checkbox checked={setting.email} />
+            <Checkbox
+              checked={setting.email}
+              onClick={() => handleCheckboxClick(row.id, "email")}
+            />
           </div>
         )),
       sortable: false,
       style: {
-        // Add custom style to remove dividers
         borderRight: "none",
       },
     },
@@ -155,24 +163,39 @@ function NotificationSettings() {
       cell: (row) =>
         row.settings.map((setting, index) => (
           <div key={index}>
-            <Checkbox checked={setting.push_notification} />
+            <Checkbox
+              checked={setting.push_notification}
+              onClick={() => handleCheckboxClick(row.id, "push_notification")}
+            />
           </div>
         )),
       sortable: false,
       style: {
-        // Add custom style to remove dividers
         borderRight: "none",
       },
     },
   ];
 
+  const handleCheckboxClick = (notificationIndex, field) => {
+    const updatedSettings = [...checkboxValues];
+    updatedSettings[notificationIndex.split("_")[0]].settings[
+      notificationIndex.split("_")[1]
+    ][field] =
+      !updatedSettings[notificationIndex.split("_")[0]].settings[
+        notificationIndex.split("_")[1]
+      ][field];
+
+    setCheckboxValues(updatedSettings);
+    console.log("updatedSettings", updatedSettings);
+  };
+
   // Flatten the settings into individual rows
-  const notificationSettings = initialNotificationSettings.flatMap((item) =>
+  const notificationSettings = checkboxValues.flatMap((item) =>
     item.settings.map((setting, index) => ({
       id: `${item.id}_${index}`,
       notification_type: index === 0 ? item.notification_type : "",
       settings: [setting],
-      noDivider:true ,
+      noDivider: true,
     }))
   );
 
@@ -180,7 +203,13 @@ function NotificationSettings() {
     <Grid container spacing={2} padding={3} sx={2}>
       <Grid item xs={12}>
         <Grid item xs={12}>
-          <DataTable columns={columns} data={notificationSettings} responsive  customStyles={customStyles} noDivider={true}/>
+          <DataTable
+            columns={columns}
+            data={notificationSettings}
+            responsive
+            customStyles={customNotificationTableStyle}
+            noDivider={true}
+          />
         </Grid>
       </Grid>
     </Grid>

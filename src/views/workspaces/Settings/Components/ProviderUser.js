@@ -7,6 +7,7 @@ import MoreIcon from "@mui/icons-material/MoreVert";
 import Switch from "@mui/material/Switch";
 import { Grid, Menu, MenuItem } from "@mui/material";
 import { useNavigate } from "react-router";
+import { customDataTableStyles } from "../../../../ccm-constant";
 
 const data = [
   {
@@ -226,6 +227,7 @@ const MyDataTable = () => {
                 sortColumn={sortedColumn}
                 sortDirection={sortDirection}
                 pagination
+                customStyles={customDataTableStyles}
               />
             </Grid>
           </Grid>
