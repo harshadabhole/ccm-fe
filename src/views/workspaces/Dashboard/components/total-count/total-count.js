@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import Chart from "react-apexcharts";
 import { HelpOutline } from "@mui/icons-material";
 import {
@@ -11,8 +11,12 @@ import {
   Input,
   CardContent
 } from "@mui/material";
+import DatePicker from "react-datepicker";
+import "react-datepicker/dist/react-datepicker.css"
+import cardStyle from "../../../../../theme/card-layout";
 
 const TotalCount = ({ item }) => {
+  const [startDate, setStartDate] = useState(new Date());
   // const data = {
   //   completed: "786,617",
   //   inProgress: "13,561"
@@ -91,7 +95,7 @@ const TotalCount = ({ item }) => {
           boxShadow: "0px 0px 8px #00000029",
           borderRadius: "5px",
           opacity: 1,
-          height: 196
+          height: 190
         }}
       >
         <CardContent>

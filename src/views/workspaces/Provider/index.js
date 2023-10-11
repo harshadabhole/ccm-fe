@@ -9,6 +9,7 @@ import {
   Paper
 } from "@mui/material";
 import ProviderList from "./components/Provider-List/provider-list";
+import CustomPagination from "../../../ui-component/Pagination";
 
 
 const Provider = () => {
@@ -23,6 +24,9 @@ const Provider = () => {
           <ProviderList/>
         </CardContent>
       </Card>
+      </Grid>
+      <Grid item xs={12} display="flex" alignItems="center" justifyContent="end">
+        <CustomPagination />
       </Grid>
     </Grid>
   );

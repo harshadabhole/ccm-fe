@@ -24,6 +24,7 @@ import PatientDataTable from "./Patient-Table";
 import MediaCard from "./test-table/patient";
 import cardStyle from "../../../../theme/card-layout";
 import { RevenueChart } from "./revenue/revenue-chart";
+import CustomPagination from "../../../../ui-component/Pagination";
 
 export const Analytics = () => {
   const navigate = useNavigate();
@@ -79,7 +80,6 @@ export const Analytics = () => {
             boxShadow: "0px 0px 8px #00000029",
             borderRadius: "5px",
             opacity: 1,
-            // height:75,
           }}>
           <CardContent>
             <RevenueChart />
@@ -93,6 +93,7 @@ export const Analytics = () => {
             boxShadow: "0px 0px 8px #00000029",
             borderRadius: "5px",
             opacity: 1,
+            height: 290
           }}
           spacing={3}
         >
@@ -118,14 +119,17 @@ export const Analytics = () => {
             boxShadow: "0px 0px 8px #00000029",
             borderRadius: "5px",
             opacity: 1,
+            height: 290
           }}
         >
           <Typography sx={{ fontWeight: 800, marginBottom: "10px" }}>
             Used Device
           </Typography>
+          {/* <Box sx={{overflowY: 'auto'}}> */}
           {data.map((item, index) => (
             <UsedDevice item={item} key={index} />
           ))}
+          {/* </Box> */}
         </Paper>
       </Grid>
       <Grid item xs={12} md={12}>
@@ -139,6 +143,9 @@ export const Analytics = () => {
           <ProviderGroupTable />
         </Paper>
       </Grid>
+      <Grid item xs={12} display="flex" alignItems="center" justifyContent="end">
+        <CustomPagination/>
+        </Grid>
     </Grid>
   );
 };

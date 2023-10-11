@@ -201,8 +201,7 @@ const MyDataTable = () => {
         onSort={handleSort}
         sortColumn={sortedColumn}
         sortDirection={sortDirection}
-        pagination
-
+        // pagination
       />
       </Grid>
     </Grid>

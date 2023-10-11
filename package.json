@@ -19,7 +19,9 @@
     "@testing-library/user-event": "^13.5.0",
     "apexcharts": "^3.43.0",
     "chart.js": "^4.4.0",
+    "date-fns": "^2.30.0",
     "faker": "^6.6.6",
+    "flatpickr": "^4.6.13",
     "formik": "^2.4.4",
     "mui-datatables": "^4.3.0",
     "rc-scrollbars": "^1.1.6",
@@ -28,6 +30,7 @@
     "react-chartjs-2": "^5.2.0",
     "react-data-table-component": "^7.5.4",
     "react-date-picker": "^10.5.1",
+    "react-datepicker": "^4.20.0",
     "react-dom": "^18.2.0",
     "react-drag-drop-files": "^2.3.10",
     "react-dropzone": "^14.2.3",
@@ -74,6 +77,7 @@
   "devDependencies": {
     "@babel/cli": "^7.22.15",
     "@babel/core": "^7.22.15",
+    "@babel/plugin-proposal-private-property-in-object": "^7.21.11",
     "@babel/preset-env": "^7.22.15"
   }
 }

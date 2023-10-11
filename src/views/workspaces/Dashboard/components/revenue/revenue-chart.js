@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import {
   Chart as ChartJS,
   CategoryScale,
@@ -23,10 +23,6 @@ import {
 } from "@mui/material";
 import { Bar } from "react-chartjs-2";
 import cardStyle from "../../../../../theme/card-layout";
-import AdapterDateFns from "@mui/lab/AdapterDateFns";
-// import DatePicker from "./DatePicker";
-import Flatpickr from "react-flatpickr";
-import "flatpickr/dist/themes/material_green.css";
 
 ChartJS.register(
   CategoryScale,
@@ -105,13 +101,14 @@ export const data = {
 };
 
 export function RevenueChart() {
+  const [startDate, setStartDate] = useState(new Date());
   const monthHandler = () => {};
 
   return (
     <Box>
       <Grid container alignItems="center" spacing={1}>
         <Grid item xs={12} sm={12} md={12} lg={6} xl={4}>
-          <Typography sx={{ fontWeight: 800 }}>
+          <Typography  sx={{ fontWeight: 800 }}>
             New Patients for CCM Program
           </Typography>
         </Grid>
@@ -156,17 +153,7 @@ export function RevenueChart() {
           {/* </Paper> */}
         </Grid>
         <Grid item xs={12} sm={12} md={12} lg={6} xl={4}>
-          <Flatpickr
-            options={{
-              mode: "range",
-              // eslint-disable-next-line no-mixed-operators
-              defaultDate: [
-                new Date(),
-                new Date(new Date().getTime() + 5 * 24 * 60 * 60 * 1000),
-              ],
-            }}
-          />
-          {/* <DatePicker/> */}
+        
         </Grid>
       </Grid>
       <Bar options={options} data={data} />

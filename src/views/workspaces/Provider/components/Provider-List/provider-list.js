@@ -286,7 +286,8 @@ const ProviderTable = () => {
           onRowClicked={handleRowClick} 
           highlightOnHover
           pointerOnHover
-          pagination
+          // pagination
+          // paginationComponent={CustomPagination}
         />
       </Grid>
       <DrawerComponent open={open} handleOpen={handleOpen} handleClose={handleClose} data={ AddProvider} />
