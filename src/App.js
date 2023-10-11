@@ -12,6 +12,7 @@ import { User } from "./routes/UserRoutes";
 import { useDispatch} from "react-redux";
 import { closeDrawer } from "./store/slices/drawerSlices";
 import UserProfileDetails from "./views/workspaces/Settings/Components/AdminUser/UserProfileDetails";
+import "./assets/css/style.css"
 // header and sidenav
 const Header = lazy(() => import("./views/Header"));
 const SideNav = lazy(() => import("./views/Side-Nav"));

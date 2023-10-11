@@ -16,12 +16,12 @@ const FieldWithVisibilityToggle = ({
   show,
   handleToggleVisibility,
 }) => (
-  <Grid key={name} item xs={12}>
+  <Grid key={name} item>
     <Typography
-      variant="h6"
+      variant="subtitle1"
       htmlFor={name}
-      sx={{ fontSize: "18px", marginBottom: "3px" }}
-    >
+      sx={{ fontSize: "18px", marginBottom: "3px" ,fontWeight: "500"}}
+    > 
       {lables}
     </Typography>
     <Paper sx={{ marginBottom: 2, boxShadow: "3", border: "0" }}>
@@ -31,6 +31,7 @@ const FieldWithVisibilityToggle = ({
         size="small"
         name={name}
         type={show ? "text" : "password"}
+        on={(e)=>{console.log("e",name, e.target.value)}}
         InputProps={{
           endAdornment: (
             <InputAdornment position="end">

@@ -17,18 +17,21 @@ const containerStyle = {
 };
 
 const avatarStyle = {
-  position: "relative",
-  height: 200,
-  backgroundSize: "cover",
+  // position: "relative",
+  // height: 200,
+  // backgroundSize: "cover",
+  display: "flex",
+  justifyContent: "center",
+  flexDirection: "column", // To vertically center the content
 };
 
 const userProfileStyle = {
   position: "relative",
-  bottom: 0,
-  left: 5,
-  width: "100%",
+  display: "flex",
+  alignItems: "center",
+  justifyContent: "center",
   flexDirection: "column",
-  padding: "0px 16px",
+  width: "100%",
   color: "#fff",
 };
 
@@ -39,7 +42,7 @@ const imageContainerStyle = {
 const cameraIconStyle = {
   position: "absolute",
   bottom: "-25px",
-  left: "4rem",
+  // left: "10rem",
   transform: "translateX(-50%)",
   backgroundColor: "white",
   borderRadius: "50%",
@@ -114,7 +117,7 @@ function Profile() {
                 <Typography
                   variant="h6"
                   component="div"
-                  sx={{ marginBottom: "0px" }}
+                  sx={{ marginBottom: "30px" }}
                 >
                   Profile
                 </Typography>
@@ -122,85 +125,88 @@ function Profile() {
             </Grid>
             <Grid item xs={12} padding={1}>
               <Grid container xs={12} spacing={2}>
-                <Grid item xs={12} sm={4}>
-                  <Box style={avatarStyle} sx={{ marginBottom: "30px" }}>
+                <Grid item xs={12} md={12} lg={4} sm={12}>
+                  <Box
+                    style={{
+                      display: "flex",
+                      alignItems: "center",
+                      justifyContent: "center",
+                      flexDirection: "column",
+                    }}
+                    // sx={{ marginBottom: "30px" }}
+                  >
                     <Box style={userProfileStyle}>
-                      <div style={imageContainerStyle}>
-                        <Avatar
-                          alt="User Profile Photo"
-                          src={selectedImage}
-                          sx={{
-                            width: 200,
-                            height: 200,
-                            borderRadius: "50%",
-                            marginBottom: "0px",
-                          }}
-                        />
-                        {edit && (
-                          <label htmlFor="image-upload" style={cameraIconStyle}>
-                            <input
-                              id="image-upload"
-                              type="file"
-                              accept="image/*"
-                              onChange={handleImageChange}
-                              style={{ display: "none" }}
-                            />
-                            <IconButton
-                              color="primary"
-                              aria-label="upload picture"
-                              component="span"
-                            >
-                              <PhotoCameraIcon />
-                            </IconButton>
-                          </label>
-                        )}
-                      </div>
+                      {/* <div style={imageContainerStyle}> */}
+                      <Avatar
+                        alt="User Profile Photo"
+                        src={selectedImage}
+                        sx={{
+                          width: 200,
+                          height: 200,
+                          borderRadius: "50%",
+                          marginBottom: "0px",
+                        }}
+                      />
+                      {edit && (
+                        <label htmlFor="image-upload" style={cameraIconStyle}>
+                          <input
+                            id="image-upload"
+                            type="file"
+                            accept="image/*"
+                            onChange={handleImageChange}
+                            style={{ display: "none" }}
+                          />
+                          <IconButton
+                            color="primary"
+                            aria-label="upload picture"
+                            component="span"
+                          >
+                            <PhotoCameraIcon />
+                          </IconButton>
+                        </label>
+                      )}
+                      {/* </div> */}
                     </Box>
                   </Box>
                 </Grid>
-                <Grid item xs={12} sm={4}>
+
+                <Grid item xs={12} md={12} lg={4} sm={12}>
                   {leftFields.map((field) => (
                     <React.Fragment key={field.key}>
-                      <Typography
-                        variant="h6"
-                        component="div"
-                        sx={{
-                          marginBottom: "10px",
-                          fontSize: "18px",
-                          display: "flex",
-                        }}
-                      >
-                        <Grid container xs={12} spacing={1}>
-                          <Grid item xs={edit ? 12 : 4}>
-                            <span
-                              style={{
-                                fontWeight: "bold",
-                                // marginRight: "10px",
-                              }}
-                            >
-                              {field.label}
-                            </span>
-                          </Grid>
-                          <Grid item xs={edit ? 12 : 8}>
-                            {!edit && (
-                              <>
-                                <span
-                                  style={{
-                                    fontWeight: "bold",
-                                    marginRight: "5px",
-                                  }}
-                                >
-                                  :{" "}
-                                </span>
-                                <span style={{ fontWeight: "400" }}>
-                                  {values[field.key]}
-                                </span>
-                              </>
-                            )}
-                          </Grid>
+                      <Grid container xs={12} spacing={1}>
+                        <Grid item xs={edit ? 12 : 4}>
+                          <Typography
+                            variant="subtitle1"
+                            component="div"
+                            sx={{
+                              marginBottom: "3px",
+                              // fontSize: "18px",
+                              display: "flex",
+                            }}
+                          >
+                            {field.label}
+                          </Typography>
                         </Grid>
-                      </Typography>
+                        <Grid item xs={edit ? 12 : 8}>
+                          {!edit && (
+                            <>
+                              <Typography
+                                variant="body1"
+                                component="div"
+                                sx={{
+                                  marginBottom: "10px",
+                                  // fontSize: "18px",
+                                  display: "flex",
+                                }}
+                              >
+                                : &nbsp;&nbsp;&nbsp;{values[field.key]}
+                              </Typography>
+                            </>
+                          )}
+                        </Grid>
+                      </Grid>
                       {edit && (
+                        
                         <Field
                           as={TextField}
                           fullWidth
@@ -208,55 +214,49 @@ function Profile() {
                           name={field.key}
                           sx={{
                             marginBottom: "10px",
-                            boxShadow: 3,
-                            width: "100%",
+                            boxShadow: 4,
+                            width:"90%"
                           }}
                         />
                       )}
                     </React.Fragment>
                   ))}
                 </Grid>
-                <Grid item xs={12} sm={4}>
+                <Grid item xs={12} md={12} lg={4} sm={12}>
                   {rightFields.map((field) => (
                     <React.Fragment key={field.key}>
-                      <Typography
-                        variant="h6"
-                        component="div"
-                        sx={{
-                          marginBottom: "10px",
-                          fontSize: "18px",
-                          display: "flex",
-                        }}
-                      >
-                        <Grid container xs={12} spacing={1}>
-                          <Grid item xs={edit ? 12 : 4}>
-                            <span
-                              style={{
-                                fontWeight: "bold",
-                              }}
-                            >
-                              {field.label}
-                            </span>
-                          </Grid>
-                          <Grid item xs={edit ? 12 : 8}>
-                            {!edit && (
-                              <>
-                                <span
-                                  style={{
-                                    fontWeight: "bold",
-                                    marginRight: "5px",
-                                  }}
-                                >
-                                  :{" "}
-                                </span>
-                                <span style={{ fontWeight: "400" }}>
-                                  {values[field.key]}
-                                </span>
-                              </>
-                            )}
-                          </Grid>
+                      <Grid container xs={12} spacing={1}>
+                      <Grid item xs={edit ? 12 : 4}>
+                          <Typography
+                            variant="subtitle1"
+                            component="div"
+                            sx={{
+                              marginBottom: "10px",
+                              // fontSize: "18px",
+                              display: "flex",
+                            }}
+                          >
+                            {field.label}
+                          </Typography>
                         </Grid>
-                      </Typography>
+                        <Grid item xs={edit ? 12 : 8}>
+                          {!edit && (
+                            <>
+                              <Typography
+                                variant="body1"
+                                component="div"
+                                sx={{
+                                  marginBottom: "10px",
+                                  // fontSize: "18px",
+                                  display: "flex",
+                                }}
+                              >
+                                : &nbsp;&nbsp;&nbsp;{values[field.key]}
+                              </Typography>
+                            </>
+                          )}
+                        </Grid>
+                      </Grid>
                       {edit && (
                         <Field
                           as={TextField}
@@ -266,7 +266,7 @@ function Profile() {
                           sx={{
                             marginBottom: "10px",
                             boxShadow: 3,
-                            width: "100%",
+                            width: "90%",
                           }}
                         />
                       )}
